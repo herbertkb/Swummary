@@ -15,7 +15,7 @@
 using System;
 using NUnit.Framework;
 
-namespace Swummy.CLI.Tests
+namespace Swummary.CLI.Tests
 {
     [TextClass]
     public class SwummyCLITest
