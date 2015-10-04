@@ -1,0 +1,7 @@
+[Bb]in/
+[Oo]bj/
+TestResults
+packages/*/
+*.suo
+*.user
+CodeAnalyzer/packages/

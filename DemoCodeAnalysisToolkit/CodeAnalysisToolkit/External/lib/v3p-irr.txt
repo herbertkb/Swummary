@@ -1,0 +1,10 @@
+# Irregular 3rd person singular verbs (not in kimmo)
+# Sources:
+# http://www.usingenglish.com/reference/irregular-verbs/
+# http://grammar.ccc.commnet.edu/grammar/irregulars.htm
+is
+has
+does
+goes
+are
+# are is 3rd person plural

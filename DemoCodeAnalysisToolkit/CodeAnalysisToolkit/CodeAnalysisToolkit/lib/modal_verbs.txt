@@ -1,0 +1,14 @@
+# Modal verbs deserve special treatment
+# Sources:
+# http://www.learnenglish.de/grammar/verbmodal.htm
+# http://www.englishpage.com/modals/modalforms.html
+can
+could
+may
+might
+must
+# ought to -- no Java methods in source forge corpus began with "ought"
+shall
+should
+will
+would

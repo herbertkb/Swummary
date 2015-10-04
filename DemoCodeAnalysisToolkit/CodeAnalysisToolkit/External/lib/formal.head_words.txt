@@ -1,0 +1,244 @@
+# Head words with little or no semantics, where overlap indicates
+# referral to the same concept.
+#
+# Looked for overlap between the head word of a method name
+# and the head-1 word of a formal parameter name or type.
+#
+# If the name head word overlapped multiple parameters, the example
+# was skipped (however, a name head word could match both the name
+# and type of a single formal parameter).
+#
+# A list of the top 200 most frequent occurrences from source
+# forge corpus was hand-tuned by Emily Hill, based on examples
+# (especially method names starting with 'add').
+# Data: SWUM/data/overlap/formalTypeOverlap*
+#
+# Equivalence means two items refer to the same concept, and may be
+# used to represent, retrieve, or replicate the original entity
+# referred to in the name. A descriptor may describe or be part of
+# an entity, but cannot be used to retrieve/replicate it.
+#
+# Examples:
+#  addAuction(String auctionName) <- name-param equivalent
+#  addColumn(String columnName,   <- Name & Type are descriptors
+#            String columnType)      here, no longer referents
+#
+15682 name
+11222 event
+9985 id
+#4914 type # Head of formal type, equivalent; head of formal name, descriptor
+2330 stream
+1909 info
+#1697 1
+1596 data
+1405 value
+1163 element
+1134 string
+1112 index
+1071 node
+# 974 initializer
+# 951 chain # filter chain
+ 921 key
+# vo = value object http://en.wikipedia.org/wiki/Value_Objects
+# http://java.sun.com/blueprints/corej2eepatterns/Patterns/TransferObject.html
+ 912 vo
+ 876 number
+ 876 class
+ 833 file
+# 687 context
+ 648 descriptor
+ 620 object
+ 596 path
+# 551 kind # descriptor
+ 546 model
+# like vo, encapsulate data http://en.wikipedia.org/wiki/JavaBean
+ 544 bean
+# 537 request # request add user: user != add user request
+ 534 message
+# 522 manager # add user: user != user manager
+ 520 buffer
+# 508 list # aggregator
+ 506 impl
+ 504 code
+# 451 writer # unless verb = close
+ 444 item
+# 439 factory # does the creation, but not equivalent
+ 432 num
+ 402 interface
+ 399 str
+# 399 angle
+ 367 definition
+# 366 set # unless head = result
+# URI, URL, and path all similar
+ 356 uri
+ 354 text
+ 352 config
+ 345 tree
+# 339 output
+ 326 def
+ 325 ref
+# 313 array # aggregator
+ 309 url
+# http://www.acronymfinder.com/Information-Technology/ELT.html
+# *element, external link, or "extraction, load & transfer"
+ 307 elt
+ 297 description
+# 296 param # no uniform rule
+# like vo
+ 293 dto
+# 288 t
+# pk = primary key, like id & key
+ 288 pk
+# 283 local # possible
+# data object
+ 280 do
+# 278 selector #special case for add, set?
+# no = number
+ 272 no
+# 264 pattern # special case
+# 255 map # unclear
+ 254 detail
+ 253 entry
+ 252 spec
+ 246 handle
+# 238 i # in type = interface/impl
+ 236 input
+ 232 format
+ 223 wrapper
+# if = interface
+ 222 if
+ 219 view
+# 216 form # possible
+ 212 tag
+# msg not as good as message
+ 199 msg
+ 199 container
+ 194 reference
+# 192 builder
+# 179 listener
+# in : if not input stream
+ 177 in
+# 176 handler # like manager?
+# 172 state
+# 171 action
+# 166 producer # like VO, DTO?
+ 162 holder
+ 162 doc
+# 161 operation # special case
+# 160 mode
+# 158 attribute
+ 155 desc
+# 147 base
+ 144 instance
+# 140 result # could be output param
+ 140 identifier
+# 140 group # aggregator
+# 136 rect
+# 136 loader
+# 135 filter
+ 135 facade
+###### STOPPED AT 100 ######
+# Lines below only skimmed
+############################
+# 135 e
+# 134 size
+ 133 configuration
+# 131 panel
+ 130 new
+# 130 bounds
+# source: like input
+ 125 source
+# 124 bar
+# enum: like impl, type
+ 122 enum
+# 119 level
+ 118 adapter
+# 116 parameters
+# 115 encoder
+# 114 record
+ 114 obj
+ 114 expr
+# 112 property
+# 111 count
+# 111 component
+ 111 address
+ 109 location
+# 106 consumer
+# 105 parser
+# 104 xml
+# 104 status
+# 103 member
+# 103 header
+ 102 val
+# 102 to
+# 101 properties
+ 100 document
+# 100 command # special case action
+# 100 callback
+  98 label
+#  98 front
+  97 dir
+#  96 sequence
+  95 dn
+  94 proxy
+#  94 2
+#  92 observer
+  91 declaration
+  90 statement
+#  89 gene
+#  88 reader
+#  88 method
+#  88 collection
+#  87 processor
+#  87 line
+#  86 meta
+#  86 flag
+#  86 filename
+#  86 exp
+#  85 host
+#  84 time
+#  84 table
+#  84 details
+  84 decl
+#  83 renderer
+#  82 params
+#  80 service
+#  80 menu
+  80 bytes
+#  79 position
+#  78 support
+#  78 area
+#  77 summary
+#  77 icon
+#  77 char
+#  76 part
+#  75 field
+#  75 controller
+#  73 specification
+#  72 style
+#  72 content
+#  70 template
+#  70 idx # like index?
+#  69 title
+#  69 pool
+  67 elem
+  66 profile
+# pa is like param
+  66 p
+#  65 symbol
+#  64 values
+#  64 req
+#  64 query
+#  64 color
+#  64 attr
+#  63 control
+#  63 0
+#  62 task
+#  62 names
+#  62 expression
+#  61 row
+#  61 bundle
+#  61 box
+#  60 peer
+#  60 folder
+#  59 old

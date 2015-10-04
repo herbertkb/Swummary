@@ -1,0 +1,470 @@
+## Freq of examples where the frequency of the first word (in first position)
+## is less than frequency of second word (in first position), and the likelihood
+## of being a verb vs a noun for both word1 and word2 is high (i.e., V(w1) > N(w1)
+## && V(w2) > N(w2)
+##
+## Just looked at top 200+ examples (no fewer than 20 occurrences)
+##
+#83726 get
+82363 test
+#56467 set
+32644 do
+#11790 create
+#8447 add
+6450 handle
+#5156 remove
+3799 check
+#3284 read
+3245 accept
+#2780 visit
+2663 execute
+2484 expect
+#2358 insert
+#2314 drag
+2178 run
+2074 process
+#2073 write
+#1960 start # special
+1686 perform
+1454 debug
+#1430 update
+1393 notify
+#1301 make
+#1270 send
+#1257 show
+#1165 generate
+#1055 fire # special -- event
+#1020 build
+# 999 print
+# 990 prepare
+# 967 parse
+ 874 maybe
+# 867 load
+# 807 emit # like write
+# 797 find
+# 771 delete
+# 737 register
+ 710 try
+ 693 invoke
+# 542 setup
+# 542 begin # special
+ 448 enable
+# 426 append
+# 391 save
+ 383 stop
+# 383 render
+# 360 draw
+ 348 assert
+# 336 reset
+# 332 adjust
+# 303 encode
+# 303 compute
+ 292 validate
+ 268 cancel
+# 264 fsound
+# 240 convert
+# 224 paint
+# 223 apply
+# 215 fill
+# 207 deserialize
+# 206 store
+# 206 proto
+# 206 compile
+# 202 release
+# 197 calculate
+# 196 initialize
+ 190 attempt
+# 179 mark
+ 169 verify
+# 168 import
+ 166 toggle
+# 160 put
+# 156 fmusic
+# 155 lookup
+ 153 need
+# 148 decode
+# 142 copy
+# 136 receive
+ 134 undo
+# 130 resolve # ?
+ 129 dispatch
+# 128 push
+# 125 construct
+# 122 hide
+# 113 define
+# 111 arrange
+ 110 commit
+# 104 deflate
+# 104 choose
+# 104 cairo
+# 103 refresh
+# 103 attach
+# 102 enter
+# 102 connect
+# 100 wing
+  98 ensure
+#  97 modify
+#  96 dump
+#  95 increment
+#  95 bind
+#  91 inflate
+#  90 disconnect
+  88 please
+#  88 configure
+#  87 xtest
+#  86 wrap
+#  86 throw # special -- throw NP (exception)
+#  86 scan
+#  86 reverse
+#  86 replace
+#  86 populate
+#  86 itest
+#  86 disease
+#  86 coalesce
+  85 really
+#  82 propagate
+#  82 detach
+#  79 pop
+#  79 compare
+  78 fetch
+#  76 retrieve
+#  76 extract
+#  75 translate
+#  75 bionote
+#  74 walk
+  72 abort
+#  71 erase
+  71 enforce
+  69 resume
+#  69 acquire
+#  68 play
+#  68 export
+#  67 clone
+#  66 flush
+#  64 restore
+#  63 interpret
+#  63 hash
+#  62 evaluate
+#  62 assign
+  61 exit
+#  60 merge
+  58 implement
+#  57 dispose
+#  56 transform
+#  56 cleanup
+  55 kill
+#  54 destroy # opposite of creation
+#  53 wait
+#  53 poison
+#  53 intern
+#  52 upgrade
+  52 recurse
+#  52 getpb
+#  52 deploy
+#  52 arrive
+#  51 install
+#  48 fix
+#  47 take
+#  47 reject
+#  47 determine
+#  46 ask
+  45 pause
+  45 enqueue
+#  44 skip
+#  44 propogate
+  44 finalize
+#  41 expand
+  41 activate
+#  39 notifyset
+#  39 launch # special like begin
+#  39 externalize
+  38 go
+#  37 unify
+#  35 split
+#  34 unlock
+#  34 obtain
+#  33 serialize
+#  33 resize
+#  33 peek
+#  33 lockss
+#  33 inform # could be like notify?
+#  33 combine
+#  32 subdivide
+#  32 recebe
+#  31 unregister
+#  30 suspend
+#  30 have
+#  30 cast
+#  30 aimutil
+  29 initiate
+#  29 flate
+#  28 collect
+#  27 traverse
+#  27 startup # special
+  27 interrupt
+#  27 enumerate
+#  26 roll
+#  25 terminate
+#  25 stringc
+#  25 reorder
+#  25 pad
+#  25 allocate
+#  24 compress
+#  23 stringw
+#  23 broadcast
+#  22 seek
+#  22 rotate
+#  22 reload
+#  22 reductive
+  22 possibly
+#  22 metaph
+#  22 concatenate
+  21 lazily
+#  21 describe
+#  20 restart
+#  20 rebuild
+#  20 ipoutlookitemcollection
+#  20 escape
+#  20 anticipate
+#  19 synchronize
+#  19 redraw
+#  18 setvertex
+#  18 persist
+#  18 manage
+#  18 getvertex
+#  18 getbtn
+#  18 comod
+#  17 putstatic
+#  17 putfield
+#  17 purge
+#  17 explain
+#  17 consult
+#  16 testurl
+#  16 plant
+#  16 leave
+#  16 invalidate
+#  16 instantiate
+#  16 detect
+#  16 amend
+#  15 solve
+#  15 shutdown
+#  15 shut
+#  15 reflect
+#  15 produce
+#  15 increase
+#  15 flip
+#  15 fixme
+#  15 encrypt
+#  15 deregister
+#  15 chop
+#  15 approve
+#  14 unlink
+#  14 testpackage
+#  14 strip
+#  14 reserve
+#  14 recti
+#  14 provide
+#  14 multiply
+#  14 getstatic
+#  14 getfield
+#  14 declare
+#  14 condl
+#  14 browse
+#  14 ajouter
+#  13 rename
+#  13 listbook
+#  13 insertar
+#  13 hear
+#  13 deactivate
+#  13 choicebook
+#  13 announce
+#  13 analyze
+#  12 tell
+#  12 subtract
+#  12 setindex
+#  12 recompile
+#  12 realize
+#  12 pack
+#  12 optimize
+#  12 nfsproc
+#  12 mutate
+#  12 instatiate
+#  12 getindex
+#  12 divide
+#  12 decodev
+#  12 debye
+#  12 datamgr
+#  12 baseset
+#  11 suggest
+#  11 redo
+#  11 reconcile
+#  11 publish
+#  11 marshall
+#  11 invert
+#  11 intercept
+#  11 give
+#  11 gcspy
+#  11 forget
+#  11 compose
+#  11 bench
+#  11 assess
+#  10 unload
+#  10 sigmoid
+#  10 normalize
+#  10 logout
+#  10 jgdbm
+#  10 iconv
+#  10 establish
+#  10 discard
+#  10 dip
+#  10 connpb
+#  10 atest
+#   9 undeploy
+#   9 traite
+#   9 substitute
+#   9 stringify
+#   9 say
+#   9 retryable
+#   9 rerun
+#   9 require
+   9 raise
+#   9 prevent
+#   9 postprocess
+#   9 inject
+#   9 hijack
+#   9 guess
+#   9 decide
+#   9 customize
+#   9 constrain
+#   9 breed
+#   9 bigloo
+#   9 assemble
+#   8 valuehandler
+#   8 treat
+#   8 swtrace
+#   8 strictly
+#   8 simulate
+#   8 simplify
+#   8 rijndael
+#   8 revoke
+#   8 recover
+#   8 prerender
+#   8 pick
+#   8 notest
+#   8 motmot
+#   8 listen
+#   8 iterate
+#   8 initialise
+#   8 gracefull
+#   8 getyy
+#   8 fixup
+#   8 dladdr
+#   8 distribute
+#   8 cmplt
+#   8 chmod
+#   8 cfurl
+#   8 aquire
+#   7 warn
+#   7 subarray
+#   7 setdo
+#   7 rewrite
+#   7 remember
+#   7 reduce
+#   7 recreate
+#   7 recalculate
+#   7 quit
+#   7 preorder
+#   7 modop
+#   7 loadhash
+#   7 isolate
+#   7 getlbl
+#   7 getcb
+#   7 flatten
+#   7 enhance
+#   7 encore
+#   7 discover
+#   7 dicho
+#   7 derive
+#   7 decrement
+#   7 creer
+#   7 consume
+#   7 construire
+#   7 coin
+#   7 borrow
+#   7 authorize
+#   7 advance
+#   6 wrapless
+#   6 unmarshall
+#   6 uninstall
+#   6 train
+#   6 toy
+#   6 tokenize
+#   6 tesselate
+#   6 swap
+#   6 setauth
+#   6 safelly
+#   6 retreive
+#   6 refsect
+#   6 redeploy
+#   6 randomize
+#   6 puede
+#   6 prepend
+#   6 paste
+#   6 ownapi
+#   6 migrate
+#   6 locate
+#   6 inspect
+#   6 inpersistant
+#   6 imatrix
+#   6 identify
+#   6 gnujsp
+#   6 getauth
+#   6 getall
+#   6 fcolor
+#   6 epoll
+#   6 die
+#   6 decodevv
+#   6 decodevs
+#   6 cut
+#   6 charmap
+#   6 bfcolor
+#   6 bessely
+#   6 besselj
+#   6 bcolor
+#   6 backprop
+#   6 await
+#   6 amove
+#   5 xxtest
+#   5 truncate
+#   5 transmit
+#   5 touch
+#   5 toogle
+#   5 taprepare
+#   5 serve
+#   5 resist
+#   5 repaint
+#   5 reopen
+#   5 remap
+#   5 preprocess
+#   5 navigate
+#   5 nariva
+#   5 inbuf
+#   5 gettxt
+#   5 disambiguate
+#   5 cusum
+#   5 creat
+#   5 cloneability
+#   5 claim
+#   5 authenticate
+#   5 attemp
+#   5 asistente
+#   5 analyse
+# removed < 5
+# added some
+0 force
+0 allow
+#0 continue?
+#0 schedule?
+#0 confirm
+#0 request?
+0 impl

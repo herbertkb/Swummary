@@ -1,0 +1,8 @@
+start
+begin
+before
+end
+finish
+init
+initialize
+initialise

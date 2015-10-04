@@ -1,0 +1,112 @@
+# trend: true particles have a lot of no params methods
+# Particle != theme
+set up
+tear down
+clean up
+count up
+#get in // get something in or get input
+zoom in
+wake up
+check out
+check in
+write out
+#go back // back = theme
+#get on // getters different
+take down
+carry out
+close down
+turn off
+jump to
+go to
+turn on
+look up
+#get up
+#get by // get by attribute
+#go down // down = theme
+show up
+fix up
+fill in
+add up
+pick up
+catch up
+call on
+wait on
+#put in
+look for
+give back
+fill up
+write down
+#stand up // special case: no object, only agent
+#pass up // up = theme
+hook up
+#7 get in // get something in or get input
+#hold out // constructors
+#write out // should writeOUT be different from writeOut?
+take over
+hang up
+#get through // getter - returns TThrough
+#draw up // insufficient evidence
+#6 count in // count number in
+stand by
+give up
+#go back // back=theme
+#4 try on // starts try transaction
+#take up // insufficient evidence
+take back
+go on
+go away
+cut down
+check for
+back up
+take out
+put out
+put down
+#go into // into = prep
+#get over
+drop out
+check on
+break up
+break off
+wipe out
+turn around
+take off
+run away
+#make over insufficient data
+hold on
+hang out
+#go out // insufficient data
+#give in // only 2 test cases
+get away
+#get along // id split: get a long
+fill out
+#cut off // special NP collocation
+#clear out // clear out or clear output?!?
+#clean up // cleanUP different from clean up?
+carry over
+bring up
+shut off
+put on
+#put in // putIn special setter
+put away
+#1 pull out
+pay off
+#1 pass out
+#1 keep out
+keep on
+hold off
+get off
+do over
+#1 check with
+check off
+check into
+carry on
+#1 call up
+break in
+# blow up // NP
+#1 act up // mount?
+#1 use up //?
+#pull down // ctor
+#hold up // ctor
+#hang up // ctor
+#go down
+back down
