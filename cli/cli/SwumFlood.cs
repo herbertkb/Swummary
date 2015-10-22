@@ -22,9 +22,10 @@ namespace Swummary
 
 
 			//TODO: Find a simpler way to setup the testing data
+			//		- figure out how to use CompleteWorkingSet by itself?
 			var testProject = new DataProject<CompleteWorkingSet> 
 					("testdata", 
-					Path.GetFullPath ("/home/kh/VCU/2015\\ Fall/CMSC\\ 451/Swummary/testdata/"),
+					Path.GetFullPath ("../../../../testdata"),
 				    "/usr/bin/srcml");
 
 			testProject.UpdateAsync ().Wait ();
@@ -36,8 +37,12 @@ namespace Swummary
 //			tagger = new UnigramTagger();
 //			posData = newPCKimmoPartOfSpeechData ();	// PC Kimmo is an ancient POS tagger.
 //
-			foreach (var expression in globalNamespace.GetExpressions()) {
-				expression.ToString ();
+			var classes = globalNamespace.GetDescendants<TypeDefinition> ();
+
+			foreach (var classe in classes) {
+				String className = classe.GetFullName ();
+				Console.WriteLine (className);
+
 			}
 
 
