@@ -9,7 +9,8 @@ Swum.NET already has ProgramElementNodes for:
         - theme is the “target” (noun phrase) of the action
         - arguments are modifiers of the action or noun phrase (adverbs or adjectives?)
 
-- Fields within a class: `FieldDeclarationNode`
+- Fields within a class: `FieldDeclarationNode
+`
     - Field is an attribute of the class (variable of the class)
 - Arguments to a method: `ArgumentNode` 
 - Types: `TypeNode`
@@ -20,10 +21,9 @@ Swum.NET already has ProgramElementNodes for:
     - destructor: `isDestructor()`
 
 Maybe use a template system to map s_units into sentences
-    -ex:
-        cheeseburger = new Hamburger(cheese);
-        cheeseburger(noun), hamburger(noun) cheese(modifier)
-        A cheeseburger is a hamburger with cheese. 
+    - cheeseburger = new Hamburger(cheese);
+    - cheeseburger(noun), hamburger(noun) cheese(modifier)
+    - A cheeseburger is a hamburger with cheese. 
 
 Challenge: when to apply which rule?
     - Apply all the rules to all the relevant ProgramElementNode
