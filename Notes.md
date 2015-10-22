@@ -22,9 +22,9 @@ Swum.NET already has ProgramElementNodes for:
 
 Maybe use a template system to map s_units into sentences
 
-    cheeseburger = new Hamburger(cheese);
-    cheeseburger(noun), hamburger(noun) cheese(modifier)
-    A cheeseburger is a hamburger with cheese. 
+    original: cheeseburger = new Hamburger(cheese);
+    SWUM:     cheeseburger(noun), hamburger(noun) cheese(modifier)
+    Mapped:   A cheeseburger is a hamburger with cheese. 
 
 Challenge: when to apply which rule?
     - Apply all the rules to all the relevant ProgramElementNode
