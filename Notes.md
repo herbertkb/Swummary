@@ -21,9 +21,10 @@ Swum.NET already has ProgramElementNodes for:
     - destructor: `isDestructor()`
 
 Maybe use a template system to map s_units into sentences
-    - cheeseburger = new Hamburger(cheese);
-    - cheeseburger(noun), hamburger(noun) cheese(modifier)
-    - A cheeseburger is a hamburger with cheese. 
+
+    cheeseburger = new Hamburger(cheese);
+    cheeseburger(noun), hamburger(noun) cheese(modifier)
+    A cheeseburger is a hamburger with cheese. 
 
 Challenge: when to apply which rule?
     - Apply all the rules to all the relevant ProgramElementNode
