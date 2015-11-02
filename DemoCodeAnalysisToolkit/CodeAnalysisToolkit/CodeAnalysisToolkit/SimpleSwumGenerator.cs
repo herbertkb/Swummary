@@ -48,5 +48,52 @@ namespace CodeAnalysisToolkit
             rule.ConstructSwum(mdn);
             Console.WriteLine(mdn.ToString());
         }
+        [TestCase]
+        public void GenerateEndingSUnit()
+        {
+            /*var dataProject = new DataProject<CompleteWorkingSet>("npp_6.2.3",
+                Path.GetFullPath("..//..//..//projects//npp_6.2.3"),
+                "..//..//..//SrcML");*/
+
+            var dataProject = new DataProject<CompleteWorkingSet>("test",
+                Path.GetFullPath("..//..//..//projects//test"),
+                "..//..//..//SrcML");
+
+            dataProject.UpdateAsync().Wait();
+
+            //get srcml stuff in order
+            NamespaceDefinition globalNamespace;
+            Assert.That(dataProject.WorkingSet.TryObtainReadLock(5000, out globalNamespace));
+
+            //initialize swum stuff
+            splitter = new ConservativeIdSplitter();
+            tagger = new UnigramTagger();
+            posData = new PCKimmoPartOfSpeechData();
+
+            //find an example method
+            var testMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == "IncrementNum").First();
+            var testMethodXElement = DataHelpers.GetElement(dataProject.SourceArchive, testMethod.PrimaryLocation);
+
+            //generate swum for method declaration
+            MethodContext mc = ContextBuilder.BuildMethodContext(testMethodXElement);
+            MethodDeclarationNode mdn = new MethodDeclarationNode("IncrementNum", mc);
+
+            //Console.WriteLine(mdn.ToString()); //returns nothing since it hasn't been written
+
+            var exp = testMethod.GetDescendants();
+            //var verb = mdn.Action.ToString();
+
+            var expResult = exp.ElementAt(exp.Count() - 1);
+            Console.WriteLine(expResult);
+
+            //MethodDeclarationNode mdn2 = new MethodDeclarationNode(expResult.ToString(), mc);
+
+            BaseVerbRule rule = new BaseVerbRule(posData, tagger, splitter);
+            Console.WriteLine("InClass = " + rule.InClass(mdn)); //REQUIRED in order for the ConstructSwum method to work
+            rule.ConstructSwum(mdn); //rewrites mdn.ToString to a SWUM breakdown
+            //rule.ConstructSwum(mdn2);
+            //Console.WriteLine(mdn.ToString());
+
+        }
     }
 }
