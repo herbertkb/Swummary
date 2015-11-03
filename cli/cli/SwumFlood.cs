@@ -24,7 +24,7 @@ namespace Swummary
 			//TODO: Find a simpler way to setup the testing data
 			//		- figure out how to use CompleteWorkingSet by itself?
 			var testProject = new DataProject<CompleteWorkingSet> 
-					("testdata", 
+					("./testdata/", 
 					Path.GetFullPath ("../../../../testdata"),
 				    "/usr/bin/srcml");
 
@@ -42,7 +42,6 @@ namespace Swummary
 			foreach (var classe in classes) {
 				String className = classe.GetFullName ();
 				Console.WriteLine (className);
-
 			}
 
 
