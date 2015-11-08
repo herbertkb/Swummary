@@ -95,6 +95,63 @@ namespace CodeAnalysisToolkit
             //Console.WriteLine(mdn.ToString());
 
         }
+        
+        public void GenerateVoidReturnSUnit(){
+            var dataProject = new DataProject<CompleteWorkingSet>("npp_6.2.3",
+                Path.GetFullPath("..//..//..//projects//npp_6.2.3"),
+                "..//..//..//SrcML");
+
+            dataProject.UpdateAsync().Wait();
+
+            //get srcml stuff in order
+            NamespaceDefinition globalNamespace;
+            Assert.That(dataProject.WorkingSet.TryObtainReadLock(5000, out globalNamespace));
+
+            //initialize swum stuff
+            splitter = new ConservativeIdSplitter();
+            tagger = new UnigramTagger();
+            posData = new PCKimmoPartOfSpeechData();
+
+            //find an example method
+            var guiMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == "saveGUIParams").First();
+            var guiMethodXElement = DataHelpers.GetElement(dataProject.SourceArchive, guiMethod.PrimaryLocation);
+
+            // forget that, find ALL the methods
+            var methods = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == "saveGUIParams");
+
+            foreach (MethodDefinition method in methods)
+            {
+                //Console.WriteLine(method.ToString());
+                var statements = method.ChildStatements;
+                foreach (Statement statement in statements)
+                {
+                    var expressions = statement.GetExpressions();
+                    foreach (Expression expression in expressions)
+                    {   
+                        // Skip any expression that contains an assignment
+                       if (expression.ToString().Contains(" =") || expression.ToString().Contains(" ->")) { continue; }
+
+                        // Print whatever's left. It should be a void return.
+                        Console.WriteLine(expression.ToString());
+
+                        // *** PoS tag it ***
+                        // convert the string to 'PhraseNode' objects so we can feed them to SWUM
+                        var pn = PhraseNode.Parse(new WordNode( expression.ToString() ).ToString() ); 
+
+                        Console.WriteLine(pn.ToString());
+
+                        // construct the "rule" to break up method names into sentences
+                        BaseVerbRule thisrule = new BaseVerbRule(posData, tagger, splitter);
+
+                        var methodNode = new MethodDeclarationNode(expression.ToString());
+
+                        thisrule.ConstructSwum(methodNode);
+
+                        Console.WriteLine(methodNode.ToString());
+                    }
+                }
+            }
+        }
     }
     
     [TestFixture]
