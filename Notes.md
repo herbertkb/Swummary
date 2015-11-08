@@ -27,7 +27,7 @@ Maybe use a template system to map s_units into sentences
     Mapped:   A cheeseburger is a hamburger with cheese. 
 
 Challenge: when to apply which rule?
-    - Apply all the rules to all the relevant ProgramElementNode
-    - There should be a confidence score on each mapping
-    - Collect the mappings with highest confidence scores
-    - I have a bad feeling the Viterbi algorithm will be involved somehow
+- Apply all the rules to all the relevant ProgramElementNode
+- There should be a confidence score on each mapping
+- Collect the mappings with highest confidence scores
+- I have a bad feeling the Viterbi algorithm will be involved somehow
