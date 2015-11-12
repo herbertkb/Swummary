@@ -16,7 +16,7 @@ namespace CodeAnalysisToolkit
     public class SimpleSwumGenerator
     {
         //change this to change referenced method name across test cases
-        string methodName = "findInFiles";
+        string methodName = "moveFiles";
         string folderName = "Sample Methods";
         string fullFilePath = "..//..//..//projects//Sample Methods";
 
