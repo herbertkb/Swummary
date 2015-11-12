@@ -279,68 +279,83 @@ namespace CodeAnalysisToolkit
         [TestCase]
         public void GenerateSameActionSUnit()
         {
-            var dataProject = new DataProject<CompleteWorkingSet>(folderName,
-                Path.GetFullPath(fullFilePath),
-                "..//..//..//SrcML");  
+         //   var dataProject = new DataProject<CompleteWorkingSet>("npp_6.2.3",
+           //     Path.GetFullPath("..//..//..//projects//npp_6.2.3"),
+             //   "..//..//..//SrcML");  
             
-            /*var dataProject = new DataProject<CompleteWorkingSet>("CodeAnalysisToolkit",
+
+            //TODO: <<<<<<<<<<<<< Assert statement to make sure this 
+
+            var dataProject = new DataProject<CompleteWorkingSet>("CodeAnalysisToolkit",
                 Path.GetFullPath("..//..//..//"),
-                "..//..//..//SrcML");*/
+                "..//..//..//SrcML");
+
+            int countSuccess = 0;
+            List<String> success = new List<String>();
+
+            String methodName = "saveLaptop";   // <<<<<<<<<<<<<<<<<<<<<<<<<===========================
 
             dataProject.UpdateAsync().Wait();
 
             //get srcml stuff in order
             NamespaceDefinition globalNamespace;
-            Assert.That(dataProject.WorkingSet.TryObtainReadLock(10000, out globalNamespace));
-
-
+            Assert.That(dataProject.WorkingSet.TryObtainReadLock(5000, out globalNamespace));
 
             //initialize swum stuff
             splitter = new ConservativeIdSplitter();
-            tagger = new UnigramTagger();       // a unigram is a single word
+            tagger = new UnigramTagger();
             posData = new PCKimmoPartOfSpeechData();
 
+         
 
+            var methodList = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == methodName);
+            MethodDefinition topMethod = null;
 
-            //find an example method
-            var guiMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == methodName).First();
-            var guiMethodXElement = DataHelpers.GetElement(dataProject.SourceArchive, guiMethod.PrimaryLocation);
+            // Check if the method was found
+            try {       
+                topMethod = methodList.First();
+            }
+            catch (System.InvalidOperationException) {
+                Console.WriteLine("--ERROR: Method '" + methodName + "' Not Found--");
+                Assert.Fail("Method '" + methodName + "' Not Found");
+            }
+
+            var guiMethodXElement = DataHelpers.GetElement(dataProject.SourceArchive, topMethod.PrimaryLocation);
 
             //generate swum for method declaration
             MethodContext mc = ContextBuilder.BuildMethodContext(guiMethodXElement);
             MethodDeclarationNode mdn = new MethodDeclarationNode(methodName, mc);
             BaseVerbRule rule = new BaseVerbRule(posData, tagger, splitter);
-            Console.WriteLine("InClass = " + rule.InClass(mdn));
-            
+            Console.WriteLine("Method = \t" + methodName);
+            Console.WriteLine("InClass = \t" + rule.InClass(mdn));
+            Console.WriteLine("Rule = \t\t" + rule.GetType().ToString().Substring(9));
 
             rule.ConstructSwum(mdn);
-            Console.WriteLine(mdn.ToString());
-
-            //========START CUSTOM
-            Console.WriteLine("=====================");
-            Console.WriteLine("=====================");
+            //Console.WriteLine(mdn.ToString());
 
             // Get the action verb from the SWUM
             String methodVerb = mdn.Action.ToPlainString().ToLower();
-            Console.WriteLine("\tVerb from Method is: " + methodVerb);
+            Console.WriteLine("Verb = \t\t" + methodVerb);
 
 
             // Get all of the lines of code that contains the verb in any form
-            var expr = guiMethod.GetDescendants().Where(t => t.ToString().Contains(methodVerb)).ToArray();     //***THIS IS BREAKING EVERYTHING
+            var expr = topMethod.GetDescendants().Where(t => t.ToString().Contains(methodVerb)).ToArray();
 
             // Iterate each line
-            foreach (Statement t in expr) {
-
+            foreach (Statement t in expr)
+            {
+                Console.WriteLine("Line: " + t.ToString());
                 // This finds any method calls in this line and finds the verb in that method - from GetCallsTo()
                 var methods = t.FindExpressions<MethodCall>(true).Where(c => c.ToString().ToLower().Contains(methodVerb));//c.Name.Contains(methodVerb));
-                
+
 
                 // Iterate through a list of the method calls in a line and find ones that contain the verb
                 foreach (MethodCall i in methods)
                 {
-                    Console.WriteLine("\tMethod contains verb: \t\t" + i.Name);
-                    
-                    
+                    Console.WriteLine("   MethodCall: " + i.ToString());
+                    //Console.WriteLine("Method contains verb: \t" + i.Name);
+
+
                     // Build SWUM for found method to get the verb out.  This uses the mc from the original swum method build 
                     //   because this MethodDeclaration node takes in a string that is then used to parse the swum rather than the mc name
                     MethodDeclarationNode mdnNEW = new MethodDeclarationNode(i.Name, mc);
@@ -348,7 +363,7 @@ namespace CodeAnalysisToolkit
 
                     if (rule.InClass(mdnNEW))
                     {
-                        Console.WriteLine("\t** InClass = " + rule.InClass(mdnNEW) + "  for  " + i.Name);
+                        Console.WriteLine("\tMethod: " +  i.Name + "\t\tInClass = true" );
 
                         rule.ConstructSwum(mdnNEW);
                         //Console.WriteLine(mdnNEW.ToString());
@@ -357,39 +372,33 @@ namespace CodeAnalysisToolkit
                         // if the verbs are the same in each method
                         if (mdnNEW.Action.ToPlainString().Equals(methodVerb, StringComparison.InvariantCultureIgnoreCase))
                         {
-                            Console.WriteLine("Found Verb in " + i.Name + "\n");
-
+                            countSuccess++;
+                            success.Add(i.Name);
                         }
                         else
                         {
                             Console.WriteLine("\tMethod does not contain the verb" + "\n");
                         }
                     }
-                    else
-                    {
-                        Console.WriteLine("ERROR: NOT IN CLASS" + "  for  " + i.Name);  
-
+                    else {
+                        Console.WriteLine("   MethodCall: i.Name  not InClass");
                     }
 
-                    
-                    
-                    
+
                 } // End Method Iteration
-                
-                
-            } //End Line Iteration
+            } // End Line Iteration
 
+            if (countSuccess == 0) {
+                Console.WriteLine("===== No Same-Action Methods Found =====");
+                Assert.Fail("No Same-Action Methods found");
+            }
+            else {
+                Console.WriteLine("\n============= SUCCESSES ===============");
+                foreach (String i in success) {
+                    Console.WriteLine(i);
+                }
 
-            /*
-             * 
-             * TODO: 
-             * 
-             *  This might break when there are two verbs in the method name
-             * 
-             * 
-             * 
-             * 
-            */
+            }
 
 
         }
