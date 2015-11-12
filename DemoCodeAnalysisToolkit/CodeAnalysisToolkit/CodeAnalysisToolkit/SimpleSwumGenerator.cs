@@ -15,9 +15,122 @@ namespace CodeAnalysisToolkit
     [TestFixture]
     public class SimpleSwumGenerator
     {
+        //change this to change referenced method name across test cases
+        string methodName = "findInFiles";
+        string folderName = "Sample Methods";
+        string fullFilePath = "..//..//..//projects//Sample Methods";
+
         private static ConservativeIdSplitter splitter;
         private static UnigramTagger tagger;
         private static PCKimmoPartOfSpeechData posData;
+
+        [SetUp]
+        public void initalizeSwum()
+        {
+            //initialize swum stuff
+            splitter = new ConservativeIdSplitter();
+            tagger = new UnigramTagger();
+            posData = new PCKimmoPartOfSpeechData();
+        }
+
+
+        [TestCase]
+        public void GenerateSimpleSwum2()
+        {
+            var dataProject = new DataProject<CompleteWorkingSet>("npp_6.2.3",
+                Path.GetFullPath("..//..//..//projects//npp_6.2.3"),
+                "..//..//..//SrcML");
+
+            dataProject.UpdateAsync().Wait();
+
+            //get srcml stuff in order
+            NamespaceDefinition globalNamespace;
+            Assert.That(dataProject.WorkingSet.TryObtainReadLock(5000, out globalNamespace));
+
+            //find an example method
+            var guiMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == "saveGUIParams").First();
+            var guiMethodXElement = DataHelpers.GetElement(dataProject.SourceArchive, guiMethod.PrimaryLocation);
+
+            //generate swum for method declaration
+            MethodContext mc = ContextBuilder.BuildMethodContext(guiMethodXElement);
+            MethodDeclarationNode mdn = new MethodDeclarationNode("saveGUIParams", mc);
+            BaseVerbRule rule = new BaseVerbRule(posData, tagger, splitter);
+            Console.WriteLine("InClass = " + rule.InClass(mdn));
+            rule.ConstructSwum(mdn);
+            Console.WriteLine(mdn.ToString());
+        }
+        
+        [TestCase]
+        public void GenerateSwumForAnyOccassion()
+        {
+            var dataProject = new DataProject<CompleteWorkingSet>(folderName,
+                    Path.GetFullPath(fullFilePath),
+                    "..//..//..//SrcML");
+
+            dataProject.UpdateAsync().Wait();
+
+            //get srcml stuff in order
+            NamespaceDefinition globalNamespace;
+            Assert.That(dataProject.WorkingSet.TryObtainReadLock(5000, out globalNamespace));
+
+            //find an example method
+            var sampleMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == methodName).First();
+
+            foreach (var line in sampleMethod.GetDescendants())
+            {
+                var sampleMethod_MethodCalls = line.FindExpressions<MethodCall>();
+
+                foreach (var methodCall in sampleMethod_MethodCalls)
+                {
+                    var swummedMdn = FromMethodCallToSWUM(methodCall, globalNamespace, dataProject);
+                    if (swummedMdn != null)
+                    {
+                        Console.WriteLine("VOID RETURN");
+                        Console.WriteLine(swummedMdn.ToString());
+                    }
+                }
+
+                //return statement
+                if (line is ReturnStatement)
+                {
+                    var returnMCall = line.FindExpressions<MethodCall>().First();
+                    var swummedMdn = FromMethodCallToSWUM(returnMCall, globalNamespace, dataProject);
+                    if (swummedMdn != null)
+                    {
+                        Console.WriteLine("RETURN STMT");
+                        Console.WriteLine(swummedMdn.ToString());
+                    }
+                }
+            }
+        }
+
+
+        private MethodDeclarationNode FromMethodCallToSWUM(MethodCall mcall, NamespaceDefinition globalNamespace, DataProject<CompleteWorkingSet> dataProject)
+        {
+            var mdef = globalNamespace.GetDescendants<MethodDefinition>().Where(decl => mcall.SignatureMatches(decl));
+            if (mdef.Count() > 0)
+            {
+                var mdefXml = DataHelpers.GetElement(dataProject.SourceArchive, mdef.First().PrimaryLocation);
+                MethodContext mc = ContextBuilder.BuildMethodContext(mdefXml);
+                MethodDeclarationNode mdn = new MethodDeclarationNode(mcall.Name, mc);
+                BaseVerbRule rule = new BaseVerbRule(posData, tagger, splitter);
+                if (rule.InClass(mdn))
+                {
+                    rule.ConstructSwum(mdn);
+                    return mdn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                Console.WriteLine(mcall.Name + " could not be found");
+                return null;
+            }
+        }
+
 
         [TestCase]
         public void GenerateSimpleSwum()
@@ -48,6 +161,7 @@ namespace CodeAnalysisToolkit
             rule.ConstructSwum(mdn);
             Console.WriteLine(mdn.ToString());
         }
+
         [TestCase]
         public void GenerateEndingSUnit()
         {
@@ -55,8 +169,8 @@ namespace CodeAnalysisToolkit
                 Path.GetFullPath("..//..//..//projects//npp_6.2.3"),
                 "..//..//..//SrcML");*/
 
-            var dataProject = new DataProject<CompleteWorkingSet>("test",
-                Path.GetFullPath("..//..//..//projects//test"),
+            var dataProject = new DataProject<CompleteWorkingSet>(folderName,
+                Path.GetFullPath(fullFilePath),
                 "..//..//..//SrcML");
 
             dataProject.UpdateAsync().Wait();
@@ -70,13 +184,13 @@ namespace CodeAnalysisToolkit
             tagger = new UnigramTagger();
             posData = new PCKimmoPartOfSpeechData();
 
-            //find an example method
-            var testMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == "IncrementNum").First();
+            //find an example method, uses global methodName variable
+            var testMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == methodName).First();
             var testMethodXElement = DataHelpers.GetElement(dataProject.SourceArchive, testMethod.PrimaryLocation);
 
             //generate swum for method declaration
             MethodContext mc = ContextBuilder.BuildMethodContext(testMethodXElement);
-            MethodDeclarationNode mdn = new MethodDeclarationNode("IncrementNum", mc);
+            MethodDeclarationNode mdn = new MethodDeclarationNode(methodName, mc);
 
             //Console.WriteLine(mdn.ToString()); //returns nothing since it hasn't been written
 
@@ -95,10 +209,10 @@ namespace CodeAnalysisToolkit
             //Console.WriteLine(mdn.ToString());
 
         }
-        
+        [TestCase]
         public void GenerateVoidReturnSUnit(){
-            var dataProject = new DataProject<CompleteWorkingSet>("npp_6.2.3",
-                Path.GetFullPath("..//..//..//projects//npp_6.2.3"),
+            var dataProject = new DataProject<CompleteWorkingSet>(folderName,
+                Path.GetFullPath(fullFilePath),
                 "..//..//..//SrcML");
 
             dataProject.UpdateAsync().Wait();
@@ -113,11 +227,11 @@ namespace CodeAnalysisToolkit
             posData = new PCKimmoPartOfSpeechData();
 
             //find an example method
-            var guiMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == "saveGUIParams").First();
+            var guiMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == methodName).First();
             var guiMethodXElement = DataHelpers.GetElement(dataProject.SourceArchive, guiMethod.PrimaryLocation);
 
             // forget that, find ALL the methods
-            var methods = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == "saveGUIParams");
+            var methods = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == methodName);
 
             foreach (MethodDefinition method in methods)
             {
@@ -152,35 +266,32 @@ namespace CodeAnalysisToolkit
                 }
             }
         }
-    }
+    //}
     
-    [TestFixture]
+    /*[TestFixture]
     public class SwumGeneratorJohn
     {
         private static ConservativeIdSplitter splitter;
         private static UnigramTagger tagger;
         private static PCKimmoPartOfSpeechData posData;
+        */
 
         [TestCase]
-        public void GenerateSimpleSwumJohn()
+        public void GenerateSameActionSUnit()
         {
-         //   var dataProject = new DataProject<CompleteWorkingSet>("npp_6.2.3",
-           //     Path.GetFullPath("..//..//..//projects//npp_6.2.3"),
-             //   "..//..//..//SrcML");  
+            var dataProject = new DataProject<CompleteWorkingSet>(folderName,
+                Path.GetFullPath(fullFilePath),
+                "..//..//..//SrcML");  
             
-            var dataProject = new DataProject<CompleteWorkingSet>("CodeAnalysisToolkit",
+            /*var dataProject = new DataProject<CompleteWorkingSet>("CodeAnalysisToolkit",
                 Path.GetFullPath("..//..//..//"),
-                "..//..//..//SrcML");
-
-
-            
-
+                "..//..//..//SrcML");*/
 
             dataProject.UpdateAsync().Wait();
 
             //get srcml stuff in order
             NamespaceDefinition globalNamespace;
-            Assert.That(dataProject.WorkingSet.TryObtainReadLock(5000, out globalNamespace));
+            Assert.That(dataProject.WorkingSet.TryObtainReadLock(10000, out globalNamespace));
 
 
 
@@ -192,12 +303,12 @@ namespace CodeAnalysisToolkit
 
 
             //find an example method
-            var guiMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == "breakEverything").First();
+            var guiMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == methodName).First();
             var guiMethodXElement = DataHelpers.GetElement(dataProject.SourceArchive, guiMethod.PrimaryLocation);
 
             //generate swum for method declaration
             MethodContext mc = ContextBuilder.BuildMethodContext(guiMethodXElement);
-            MethodDeclarationNode mdn = new MethodDeclarationNode("breakEverything", mc);
+            MethodDeclarationNode mdn = new MethodDeclarationNode(methodName, mc);
             BaseVerbRule rule = new BaseVerbRule(posData, tagger, splitter);
             Console.WriteLine("InClass = " + rule.InClass(mdn));
             
@@ -285,11 +396,6 @@ namespace CodeAnalysisToolkit
 
 
 
-
-
-
-
-
         /*
         //Important statement: This searches through the whole code and finds a method with a matching name and signature
         var matches = i.FindMatches().ToList();
@@ -326,17 +432,6 @@ namespace CodeAnalysisToolkit
 
         }
          */
-
-
-
-
-
-
-
-
-
-
-
         /*bool DoesVerbEqualMethod(String verb, MethodCall call, BaseVerbRule rule, DataProject<CompleteWorkingSet> dataProject)
         {
 
