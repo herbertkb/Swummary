@@ -16,7 +16,7 @@ namespace CodeAnalysisToolkit
     public class SimpleSwumGenerator
     {
         //change this to change referenced method name across test cases
-        string methodName = "moveFiles";
+        string methodName = "GetInt";
         string folderName = "Sample Methods";
         string fullFilePath = "..//..//..//projects//Sample Methods";
 
@@ -33,32 +33,6 @@ namespace CodeAnalysisToolkit
             posData = new PCKimmoPartOfSpeechData();
         }
 
-
-        [TestCase]
-        public void GenerateSimpleSwum2()
-        {
-            var dataProject = new DataProject<CompleteWorkingSet>("npp_6.2.3",
-                Path.GetFullPath("..//..//..//projects//npp_6.2.3"),
-                "..//..//..//SrcML");
-
-            dataProject.UpdateAsync().Wait();
-
-            //get srcml stuff in order
-            NamespaceDefinition globalNamespace;
-            Assert.That(dataProject.WorkingSet.TryObtainReadLock(5000, out globalNamespace));
-
-            //find an example method
-            var guiMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == "saveGUIParams").First();
-            var guiMethodXElement = DataHelpers.GetElement(dataProject.SourceArchive, guiMethod.PrimaryLocation);
-
-            //generate swum for method declaration
-            MethodContext mc = ContextBuilder.BuildMethodContext(guiMethodXElement);
-            MethodDeclarationNode mdn = new MethodDeclarationNode("saveGUIParams", mc);
-            BaseVerbRule rule = new BaseVerbRule(posData, tagger, splitter);
-            Console.WriteLine("InClass = " + rule.InClass(mdn));
-            rule.ConstructSwum(mdn);
-            Console.WriteLine(mdn.ToString());
-        }
         
         [TestCase]
         public void GenerateSwumForAnyOccassion()
@@ -76,13 +50,14 @@ namespace CodeAnalysisToolkit
             //find an example method
             var sampleMethod = globalNamespace.GetDescendants<MethodDefinition>().Where(m => m.Name == methodName).First();
 
-            foreach (var line in sampleMethod.GetDescendants())
+            foreach (var line in sampleMethod.GetDescendants()) //goes through lines (Statement class) in method 
             {
-                var sampleMethod_MethodCalls = line.FindExpressions<MethodCall>();
+                var sampleMethod_MethodCalls = line.FindExpressions<MethodCall>(); //represents all of the method calls within the method
 
-                foreach (var methodCall in sampleMethod_MethodCalls)
+                foreach (var methodCall in sampleMethod_MethodCalls) //goes through each method call
                 {
                     var swummedMdn = FromMethodCallToSWUM(methodCall, globalNamespace, dataProject);
+
                     if (swummedMdn != null)
                     {
                         Console.WriteLine("VOID RETURN");
@@ -196,17 +171,34 @@ namespace CodeAnalysisToolkit
 
             var exp = testMethod.GetDescendants();
             //var verb = mdn.Action.ToString();
-
+            
             var expResult = exp.ElementAt(exp.Count() - 1);
+            
             Console.WriteLine(expResult);
+            MethodDeclarationNode expMDN = null;
+            if (expResult is ReturnStatement)
+            {
+                Console.WriteLine("return");
+            }
+            else
+            {
+                var mCall = expResult.FindExpressions<MethodCall>().First();
 
+                expMDN = new MethodDeclarationNode(mCall.Name, mc);
+            }
             //MethodDeclarationNode mdn2 = new MethodDeclarationNode(expResult.ToString(), mc);
 
-            BaseVerbRule rule = new BaseVerbRule(posData, tagger, splitter);
-            Console.WriteLine("InClass = " + rule.InClass(mdn)); //REQUIRED in order for the ConstructSwum method to work
-            rule.ConstructSwum(mdn); //rewrites mdn.ToString to a SWUM breakdown
-            //rule.ConstructSwum(mdn2);
-            //Console.WriteLine(mdn.ToString());
+            //BaseVerbRule rule = new BaseVerbRule(posData, tagger, splitter);
+            //Console.WriteLine("InClass = " + rule.InClass(mdn)); //REQUIRED in order for the ConstructSwum method to work
+            //rule.ConstructSwum(mdn); //rewrites mdn.ToString to a SWUM breakdown
+            //Console.WriteLine(mdn.Action.ToString());
+
+            BaseVerbRule rule2 = new BaseVerbRule(posData, tagger, splitter);
+            Console.WriteLine("InClass = " + rule2.InClass(expMDN)); //REQUIRED in order for the ConstructSwum method to work
+            rule2.ConstructSwum(expMDN); //rewrites mdn.ToString to a SWUM breakdown
+            Console.WriteLine(expMDN.Action.ToString());
+            //Console.WriteLine(mdn.Action.ToString());
+
 
         }
         [TestCase]
