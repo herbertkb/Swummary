@@ -10,7 +10,8 @@ public class SUnitExtractor
 
 	}
 
-    public void LoadMethod (XElement method) { }
+    public void SetMethod (XElement method) { }
+    public String GetCurrentMethodName() { }
 
     public IEnumerable<XElement> GetSameAction() { }
 
