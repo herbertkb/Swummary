@@ -9,6 +9,6 @@ public class Summarizer
 	{
 	}
 
-    public static String Summarizer(String text) { }
+    public static String Summarize(String text) { return ""; }
 
 }

@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using ABB.SrcML;
 
-using Swummary;
+//using Swummary;
+using System.Xml.Linq;
 
 [TestFixture]
 public class TestSUnitExtractor
 {
 
     // Create a dummy XElement object from sample method code
-    // the raw XML output from srcml on a method from our samplemethods.cpp file
-    String srcmlOutput = @"<macro><name>breakEverything</name><argument_list>(<argument>string foo</argument>, <argument>int bar</argument>)</argument_list></macro><block>{
+    // by taking the raw XML output from srcml on a method from our samplemethods.cpp file
+    // and converting the string to a srcml method XML element.
+    XElement srcmlMethod = XElement.Parse(@"<macro><name>breakEverything</name><argument_list>(<argument>string foo</argument>, <argument>int bar</argument>)</argument_list></macro><block>{
 	                        <decl_stmt><decl><type><name>string</name></type> <name>foob</name> <init>= <expr><call><name>FindAndBreakTwoVerbs</name><argument_list>(<argument><expr><literal type = ""string"" > ""blahblahbreak"" </ literal ></ expr ></ argument >)</argument_list></call></expr></init></decl>;</decl_stmt>
 	                        <decl_stmt><decl><type><name>int</name></type> <name>breakDont</name> <init>= <expr><literal type = ""number"" > 3892 </ literal ></ expr ></ init ></ decl >;</decl_stmt>
 	                        <expr_stmt><expr><call><name>NoVerbreak</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
@@ -23,16 +25,13 @@ public class TestSUnitExtractor
 			                         <name>lastRealLine</name> <operator>=</operator> <name>True</name></expr>;</return>
 		                         }</block></then></if>
 	                         }</block></for>
-                         }</block>";
-
-    // convert the string to a srcml method XML element
-    XElement srcmlmethod = XElement.Parse(srcmlOutput);
+                         }</block>");
     
     [TestCase]
     public void LoadMethodIntoSUnitExtractor() {
 
         var extractor = new SUnitExtractor();
-        extractor.SetMethod(srcmlmethod);
+        extractor.SetMethod(srcmlMethod);
 
         Assert.AreEqual( "breakEverything", extractor.GetCurrentMethodName() );
     }
@@ -47,8 +46,8 @@ public class TestSUnitExtractor
     [TestCase]
     public void GetSameActionSUnits() {
 
-        var extractor = new TestSUnitExtractor();
-        extractor.SetMethod(srcmlmethod);
+        var extractor = new SUnitExtractor();
+        extractor.SetMethod(srcmlMethod);
 
         var sameAction = XElement.Parse(@"< decl_stmt >< decl >< type >< name > string </ name ></ type > < name > foob </ name > < init >= < expr >< call >< name > FindAndBreakTwoVerbs </ name >< argument_list > (< argument >< expr >< literal type = ""string"" > ""blahblahbreak"" </ literal ></ expr ></ argument >) </ argument_list ></ call ></ expr ></ init ></ decl >;</ decl_stmt >");
 

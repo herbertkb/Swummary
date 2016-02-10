@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Xml.Linq;
+using ABB.SrcML;
 
 public class SUnitExtractor
 {
@@ -11,12 +12,12 @@ public class SUnitExtractor
 	}
 
     public void SetMethod (XElement method) { }
-    public String GetCurrentMethodName() { }
+    public String GetCurrentMethodName() { return ""; }
 
-    public IEnumerable<XElement> GetSameAction() { }
+    public IEnumerable<XElement> GetSameAction() { return new List<XElement>(); }
 
-    public IEnumerable<XElement> GetVoidReturn() { }
+    public IEnumerable<XElement> GetVoidReturn() { return new List<XElement>(); }
 
-    public IEnumerable<XElement> GetEnding() { }
+    public IEnumerable<XElement> GetEnding() { return new List<XElement>(); }
 
 }
