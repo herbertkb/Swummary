@@ -9,12 +9,12 @@ public class TestSUnitTranslator
 
 
     [TestCase]
-    public void TranslateSameActionSUnit() { }
+    public void TranslateSameActionSUnit() { Assert.AreEqual(1, 2, "Not implemented."); }
 
     [TestCase]
-    public void TranslateVoidReturnSUnit() { }
+    public void TranslateVoidReturnSUnit() { Assert.AreEqual(1, 2, "Not implemented."); }
 
     [TestCase]
-    public void TranslateEndingSUnit() { }
+    public void TranslateEndingSUnit() { Assert.AreEqual(1, 2, "Not implemented."); }
 
 }

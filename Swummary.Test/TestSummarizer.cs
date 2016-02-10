@@ -10,6 +10,6 @@ public class TestSummarizer
 
 
     [TestCase]
-    public void SummarizeGeneratedText() { }
+    public void SummarizeGeneratedText() { Assert.AreEqual(1, 2, "Not implemented."); }
 
 }

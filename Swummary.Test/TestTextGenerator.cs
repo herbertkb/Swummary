@@ -9,6 +9,6 @@ public class TestTextGenerator
 
 
     [TestCase]
-    public void TextGenerationFromTemplate() { }
+    public void TextGenerationFromTemplate() { Assert.AreEqual(1,2, "Not implemented."); }
 
 }
