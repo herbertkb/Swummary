@@ -6,7 +6,7 @@
     <ProjectGuid>{F724854C-5D59-4009-8FEE-ACE972634630}</ProjectGuid>
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <AssemblyName>ClassLibrary</AssemblyName>
+    <AssemblyName>Swummary.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

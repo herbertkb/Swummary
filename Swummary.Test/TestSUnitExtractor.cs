@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using ABB.SrcML;
 
-//using Swummary;
 using System.Xml.Linq;
 
 [TestFixture]
