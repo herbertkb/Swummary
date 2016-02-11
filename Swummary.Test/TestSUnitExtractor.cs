@@ -1,10 +1,11 @@
-﻿using System;
-using System.Xml;
-using System.Collections.Generic;
-using NUnit.Framework;
-using ABB.SrcML;
-
+﻿using NUnit.Framework;
 using System.Xml.Linq;
+
+/**
+ * John:	findInOne, setFindInFilesDirFilter
+ * Keith:	findInOne, gethurrry, findFilesInOut
+ * Dylan: 	return true
+*/
 
 [TestFixture]
 public class TestSUnitExtractor
@@ -13,18 +14,31 @@ public class TestSUnitExtractor
     // Create a dummy XElement object from sample method code
     // by taking the raw XML output from srcml on a method from our samplemethods.cpp file
     // and converting the string to a srcml method XML element.
-    string srcmlOutput = @"<macro><name>breakEverything</name><argument_list>(<argument>string foo</argument>, <argument>int bar</argument>)</argument_list></macro><block>{
-	                        <decl_stmt><decl><type><name>string</name></type> <name>foob</name> <init>= <expr><call><name>FindAndBreakTwoVerbs</name><argument_list>(<argument><expr><literal type = ""string"" > ""blahblahbreak"" </ literal ></ expr ></ argument >)</argument_list></call></expr></init></decl>;</decl_stmt>
-	                        <decl_stmt><decl><type><name>int</name></type> <name>breakDont</name> <init>= <expr><literal type = ""number"" > 3892 </ literal ></ expr ></ init ></ decl >;</decl_stmt>
-	                        <expr_stmt><expr><call><name>NoVerbreak</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
-	                        <expr_stmt><expr><call><name>voidReturn</name><argument_list>(<argument><expr><literal type = ""string"" > ""EqualsSign = true"" </ literal ></ expr ></ argument >, <argument><expr><literal type = ""number"" > 890 </ literal ></ expr ></ argument >)</argument_list></call></expr>;</expr_stmt>
-	                         <for>for <control>(<init><decl><type><name>x</name> <name>in</name></type> <name>foo</name></decl></init>)</control><block>{
-		                         <if>if <condition>(<expr><name>True</name></expr>)</condition><then><block>{
-			                         <return>return <expr><name>False</name>
-			                         <name>lastRealLine</name> <operator>=</operator> <name>True</name></expr>;</return>
-		                         }</block></then></if>
-	                         }</block></for>
-                         }</block>";
+    string srcmlOutput = @"<function><type><name> bool </name></type> <name> findInFiles </name><parameter_list> () </parameter_list>
+                            <block>{
+	                            <decl_stmt><decl><type><specifier>const</specifier> <name>TCHAR</name> <modifier>*</modifier></type><name>dir2Search</name> <init>= <expr><call><name><name>_findReplaceDlg</name><operator>.</operator><name>getDir2Search</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+	                            <expr_stmt><expr><call><name>findFilesInOut</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	                            <if>if <condition>(<expr><operator>!</operator><name><name>dir2Search</name><index>[<expr><literal type=""number"">0</literal></expr>]</index></name> <operator>||</operator> <operator>!</operator><call><name><operator>::</operator><name>PathFileExists</name></name><argument_list>(<argument><expr><name>dir2Search</name></expr></argument>)</argument_list></call></expr>)</condition><then>
+	                            <block>{
+		                            <return>return <expr><literal type = ""boolean"" > false </literal></expr>;</return>
+	                            }</block></then></if>
+	                            <decl_stmt><decl><type><name>string</name></type> <name>findString</name> <init>= <expr><literal type = ""string"" > """" </literal ></expr ></init ></decl >;</decl_stmt>
+
+	                            <expr_stmt><expr><call><name>gethurry</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	
+	                            <macro><name>findInOne</name><argument_list>(<argument>int a</argument>, <argument>findString</argument>)</argument_list></macro><empty_stmt>;</empty_stmt>
+
+	                            <decl_stmt><decl><type><name>bool</name></type> <name>isRecursive</name> <init>= <expr><call><name><name>_findReplaceDlg</name><operator >.</operator><name>isRecursive</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+	                            <decl_stmt><decl><type><name>bool</name></type> <name>isInHiddenDir</name> <init>= <expr><call><name><name>_findReplaceDlg</name><operator >.</operator><name>isInHiddenDir</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+	                            <if>if <condition>(<expr><call><name><name>a</name><operator >.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator >==</operator> <literal type = ""number"" > 0 </literal></expr>)</condition><then>
+	                            <block>{
+		                            <expr_stmt><expr><call><name><name>a</name><operator >.</operator><name>setFindInFilesDirFilter</name></name><argument_list>(<argument><expr><literal type = ""string""> ""dddd"" </literal ></expr ></argument>, <argument><expr><call><name>TEXT</name><argument_list>(<argument><expr><literal type = ""string"" > ""*.*"" </literal ></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		                            <expr_stmt><expr><call><name><name>a</name><operator >.</operator><name>getPatterns</name></name><argument_list>(<argument><expr><name>findString</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	                            }</block></then></if>
+	                            <return>return <expr><literal type = ""boolean"" > true </literal ></expr>;</return>
+                            }</block></function>";
     
     [TestCase]
     public void LoadMethodIntoSUnitExtractor() {
@@ -34,27 +48,22 @@ public class TestSUnitExtractor
         var extractor = new SUnitExtractor();
         extractor.SetMethod(srcmlMethod);
 
-        Assert.AreEqual( "breakEverything", extractor.GetCurrentMethodName() );
+        Assert.AreEqual("findInFiles", extractor.GetCurrentMethodName() );
     }
 
- /**
- * John		FindAndBreakTwoVerbs
- * Keith	NoVerbreak, voidReturn
- * Dylan	lastRealLine = True;
- */
+
 
 
     [TestCase]
     public void GetSameActionSUnits() {
 
         var srcmlMethod = XElement.Parse(srcmlOutput);
-
+        
         var extractor = new SUnitExtractor();
         extractor.SetMethod(srcmlMethod);
 
-        var sameAction = XElement.Parse(@"< decl_stmt >< decl >< type >< name > string </ name ></ type > < name > foob </ name > < init >= < expr >< call >< name > FindAndBreakTwoVerbs </ name >< argument_list > (< argument >< expr >< literal type = ""string"" > ""blahblahbreak"" </ literal ></ expr ></ argument >) </ argument_list ></ call ></ expr ></ init ></ decl >;</ decl_stmt >");
-
-        Assert.AreEqual(sameAction.ToString(), extractor.GetSameAction().ToString() );
+        var sameAction = XElement.Parse(@"<expr_stmt><expr><call><name>findFilesInOut</name><argument_list>()</argument_list></call></expr>;</expr_stmt>");
+        Assert.Contains(sameAction, (System.Collections.IList)extractor.GetSameAction() );
 
     }
 
