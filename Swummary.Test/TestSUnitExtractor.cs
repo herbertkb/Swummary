@@ -57,19 +57,50 @@ public class TestSUnitExtractor
     [TestCase]
     public void GetSameActionSUnits() {
 
+        // Create the method srcml object in which to search for s-units.
         var srcmlMethod = XElement.Parse(srcmlOutput);
         
+        // Load the method into a S-Unit Extractor
         var extractor = new SUnitExtractor();
         extractor.SetMethod(srcmlMethod);
-
-        var sameAction = XElement.Parse(@"<expr_stmt><expr><call><name>findFilesInOut</name><argument_list>()</argument_list></call></expr>;</expr_stmt>");
+        
+        // Test if same action s-unit is returned by the SUnitExtractor
+        var sameAction = XElement.Parse(@"<expr_stmt><expr><call><name><name>a</name><operator >.</operator><name>setFindInFilesDirFilter</name></name><argument_list>(<argument><expr><literal type = ""string""> ""dddd"" </literal ></expr ></argument>, <argument><expr><call><name>TEXT</name><argument_list>(<argument><expr><literal type = ""string"" > ""*.*"" </literal ></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>");
         Assert.Contains(sameAction, (System.Collections.IList)extractor.GetSameAction() );
 
     }
 
     [TestCase]
-    public void GetVoidReturnSUnits() { Assert.AreEqual(1, 2, "Not implemented."); }
+    public void GetVoidReturnSUnits() {
+
+        // Create the method srcml object in which to search for s-units.
+        var srcmlMethod = XElement.Parse(srcmlOutput);
+
+        // Load the method into a S-Unit Extractor
+        var extractor = new SUnitExtractor();
+        extractor.SetMethod(srcmlMethod);
+
+        // Test if void return s-unit is returned by the SUnitExtractor
+        var voidReturn = XElement.Parse(@"<expr_stmt><expr><call><name>findFilesInOut</name><argument_list>()</argument_list></call></expr>;</expr_stmt>");
+        Assert.Contains(voidReturn, (System.Collections.IList)extractor.GetVoidReturn());
+
+    }
 
     [TestCase]
-    public void GetEndingSUnits() { Assert.AreEqual(1,2, "Not implemented."); }
+    public void GetEndingSUnits() {
+
+        Assert.AreEqual(1,2, "Not implemented.");
+
+        // Create the method srcml object in which to search for s-units.
+        var srcmlMethod = XElement.Parse(srcmlOutput);
+
+        // Load the method into a S-Unit Extractor
+        var extractor = new SUnitExtractor();
+        extractor.SetMethod(srcmlMethod);
+
+        // Test if ending s-unit is returned by the SUnitExtractor
+        var ending = XElement.Parse(@"<return>return <expr><literal type = ""boolean"" > true </literal ></expr>;</return>");
+        Assert.Contains(ending, 
+                        (System.Collections.IList)extractor.GetEnding());
+    }
 }
