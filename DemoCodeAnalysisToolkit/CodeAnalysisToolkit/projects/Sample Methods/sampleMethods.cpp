@@ -45,8 +45,6 @@ bool findInFiles()
 	
 	int breakDont = 3892;
 	
-	
-	
 	NoVerbreak();
 	
 	voidReturn("EqualsSign = true", 890);
