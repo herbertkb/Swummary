@@ -1,0 +1,13 @@
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\Swummary.Test.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\Swummary.Test.pdb
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\ABB.SrcML.Core.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\ABB.SrcML.Data.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\ABB.SrcML.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\ABB.Swum.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\nunit.framework.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\Swummary.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\Swummary.pdb
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\nunit.framework.xml
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\obj\Debug\Swummary.Test.csprojResolveAssemblyReference.cache
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\obj\Debug\Swummary.Test.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\obj\Debug\Swummary.Test.pdb

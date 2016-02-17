@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="0.9.5" language="C++" filename="sampleMethods.cpp">
+<comment type="block" format="doxygen">/**
+ * John:	findInOne, setFindInFilesDirFilter
+ * Keith:	findInOne, gethurrry, findFilesInOut
+ * Dylan: 	return true
+*/</comment>
+<function><type><name>bool</name></type> <name>findInFiles</name><parameter_list>()</parameter_list>
+<block>{
+	<decl_stmt><decl><type><specifier>const</specifier> <name>TCHAR</name> <modifier>*</modifier></type><name>dir2Search</name> <init>= <expr><call><name><name>_findReplaceDlg</name><operator>.</operator><name>getDir2Search</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+	<expr_stmt><expr><call><name>findFilesInOut</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><operator>!</operator><name><name>dir2Search</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>||</operator> <operator>!</operator><call><name><operator>::</operator><name>PathFileExists</name></name><argument_list>(<argument><expr><name>dir2Search</name></expr></argument>)</argument_list></call></expr>)</condition><then>
+	<block>{
+		<return>return <expr><literal type="boolean">false</literal></expr>;</return>
+	}</block></then></if>
+	<decl_stmt><decl><type><name>string</name></type> <name>findString</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
+
+	<expr_stmt><expr><call><name>gethurry</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	
+	<macro><name>findInOne</name><argument_list>(<argument>int a</argument>, <argument>findString</argument>)</argument_list></macro><empty_stmt>;</empty_stmt>
+
+	<decl_stmt><decl><type><name>bool</name></type> <name>isRecursive</name> <init>= <expr><call><name><name>_findReplaceDlg</name><operator>.</operator><name>isRecursive</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>bool</name></type> <name>isInHiddenDir</name> <init>= <expr><call><name><name>_findReplaceDlg</name><operator>.</operator><name>isInHiddenDir</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+	<if>if <condition>(<expr><call><name><name>a</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><then>
+	<block>{
+		<expr_stmt><expr><call><name><name>a</name><operator>.</operator><name>setFindInFilesDirFilter</name></name><argument_list>(<argument><expr><literal type="string">"dddd"</literal></expr></argument>, <argument><expr><call><name>TEXT</name><argument_list>(<argument><expr><literal type="string">"*.*"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>a</name><operator>.</operator><name>getPatterns</name></name><argument_list>(<argument><expr><name>findString</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></then></if>
+
+	<return>return <expr><literal type="boolean">true</literal></expr>;</return>
+}</block></function>
+
+
+
+<comment type="block" format="doxygen">/**
+ * John		FindAndBreakTwoVerbs
+ * Keith	NoVerbreak, voidReturn
+ * Dylan	lastRealLine = True;
+ */</comment>
+ <macro><name>breakEverything</name><argument_list>(<argument>string foo</argument>, <argument>int bar</argument>)</argument_list></macro><block>{
+	
+	
+	<decl_stmt><decl><type><name>string</name></type> <name>foob</name> <init>= <expr><call><name>FindAndBreakTwoVerbs</name><argument_list>(<argument><expr><literal type="string">"blahblahbreak"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	
+	<decl_stmt><decl><type><name>int</name></type> <name>breakDont</name> <init>= <expr><literal type="number">3892</literal></expr></init></decl>;</decl_stmt>
+	
+	
+	
+	<expr_stmt><expr><call><name>NoVerbreak</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	
+	<expr_stmt><expr><call><name>voidReturn</name><argument_list>(<argument><expr><literal type="string">"EqualsSign = true"</literal></expr></argument>, <argument><expr><literal type="number">890</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	
+	 <for>for <control>(<init><decl><type><name>x</name> <name>in</name></type> <name>foo</name></decl></init>)</control><block>{
+		 <if>if <condition>(<expr><name>True</name></expr>)</condition><then><block>{
+			 <return>return <expr><name>False</name>
+			 <name>lastRealLine</name> <operator>=</operator> <name>True</name></expr>;</return>
+		 }</block></then></if>
+	 }</block></for>
+ }</block>
+ 
+ 
+ <comment type="block" format="doxygen">/**
+ * John		getOtherInt
+ * Keith	intBet
+ * Dylan	int gg = getOtherInt(839201);
+ */</comment>
+ <function><type><name>void</name></type> <name>GetInt</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>inted</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>on</name></decl></parameter>)</parameter_list><block>{
+	 <expr_stmt><expr><call><name>intBet</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	 <decl_stmt><decl><type><name>int</name></type> <name>gg</name> <init>= <expr><call><name>getOtherInt</name><argument_list>(<argument><expr><literal type="number">839201</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	 
+}</block></function>
+
+ <comment type="block" format="doxygen">/** 
+ * John		moveDirectory
+ * Keith	moveDirectory
+ * Dylan	moveDirectory(blah));
+ */</comment>
+ <function><type><name>void</name></type> <name>moveFiles</name><parameter_list>(<parameter><decl><type><name>string</name></type> <name>blah</name></decl></parameter>)</parameter_list><block>{
+	 <expr_stmt><expr><call><name>moveDirectory</name><argument_list>(<argument><expr><name>blah</name></expr></argument>)</argument_list></call></expr></expr_stmt>)</block>;</function>
+ }
+ 
+
+ <comment type="block" format="doxygen">/** 
+ * John		jumpString
+ * Keith	
+ * Dylan	bool foo = jumpString(bar);
+ */</comment>
+int <macro><name>jumpInt</name><argument_list>(<argument>int bar</argument>)</argument_list></macro><block>{
+	<decl_stmt><decl><type><name>bool</name></type> <name>foo</name> <init>= <expr><call><name>jumpString</name><argument_list>(<argument><expr><name>bar</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+}</block>
+
+ <comment type="block" format="doxygen">/** 
+ * John		
+ * Keith	
+ * Dylan	return True;
+ */</comment>
+<function><type><name>int</name></type> <name>getTrue</name><parameter_list>()</parameter_list><block>{
+	<return>return <expr><literal type="boolean">true</literal></expr>;</return>
+}</block></function></unit>

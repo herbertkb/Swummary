@@ -89,8 +89,6 @@ public class TestSUnitExtractor
     [TestCase]
     public void GetEndingSUnits() {
 
-        Assert.AreEqual(1,2, "Not implemented.");
-
         // Create the method srcml object in which to search for s-units.
         var srcmlMethod = XElement.Parse(srcmlOutput);
 
