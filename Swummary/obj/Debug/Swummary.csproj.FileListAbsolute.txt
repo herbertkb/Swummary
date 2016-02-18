@@ -12,3 +12,4 @@ C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\NUnit.Visua
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\nunit.framework.xml
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.dll
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.pdb
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.csprojResolveAssemblyReference.cache
