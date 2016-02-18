@@ -34,11 +34,11 @@
     <Reference Include="ABB.SrcML">
       <HintPath>..\External\ABB.SrcML.dll</HintPath>
     </Reference>
-    <Reference Include="ABB.SrcML.Core">
-      <HintPath>..\External\ABB.SrcML.Core.dll</HintPath>
-    </Reference>
     <Reference Include="ABB.SrcML.Data">
       <HintPath>..\External\ABB.SrcML.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="ABB.SrcML.Test.Utilities">
+      <HintPath>..\External\ABB.SrcML.Test.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="ABB.Swum">
       <HintPath>..\External\ABB.Swum.dll</HintPath>
