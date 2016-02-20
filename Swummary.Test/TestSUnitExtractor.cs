@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ABB.SrcML;
 using ABB.SrcML.Data;
 using ABB.SrcML.Test.Utilities;
+using System.Linq;
 
 /**
  * John:	findInOne, setFindInFilesDirFilter
@@ -47,6 +48,7 @@ public class TestSUnitExtractor
     [TestCase]
     public void GetSameActionSUnits() {
 
+        // SrcML objects which help generate the SrcML objects we need to test
         var fileSetup = new SrcMLFileUnitSetup(Language.CPlusPlus);
         var parser = new CPlusPlusCodeParser();
 
@@ -54,31 +56,24 @@ public class TestSUnitExtractor
         var scope = parser.ParseFileUnit( fileUnit );
 
         // Create the method srcml object in which to search for s-units.
-        var srcmlMethod = scope.GetDescendants<MethodDefinition>();
-        
-        // Test if same action s-unit is returned by the SUnitExtractor
-        var sameAction = XElement.Parse(@"<expr_stmt><expr><call><name><name>a</name><operator >.</operator><name>setFindInFilesDirFilter</name></name><argument_list>(<argument><expr><literal type = ""string""> ""dddd"" </literal ></expr ></argument>, <argument><expr><call><name>TEXT</name><argument_list>(<argument><expr><literal type = ""string"" > ""*.*"" </literal ></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>");
-        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetSameAction( new MethodDefinition() );
+        var srcmlMethod = scope.GetDescendants<MethodDefinition>().First();
 
+        // Test if same action s-unit is returned by the SUnitExtractor
+        //var sameAction = srcmlMethod.GetNamedChildren("setFindInFilesDirFilter").First();
+        var sameAction = srcmlMethod.Content.GetDescendants<NameUse>().First(n => n.Name == "setFindInFilesDirFilter");
+        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetSameAction( srcmlMethod );
+        
         Assert.Contains(sameAction, sameActionsFound );
 
     }
 
-    //[TestCase]
-    //public void GetVoidReturnSUnits() {
+    [TestCase]
+    public void GetVoidReturnSUnits()
+    {
 
-    //    // Create the method srcml object in which to search for s-units.
-    //    var srcmlMethod = XElement.Parse(srcmlOutput);
 
-    //    // Load the method into a S-Unit Extractor
-    //    var extractor = new SUnitExtractor();
-    //    extractor.SetMethod(srcmlMethod);
 
-    //    // Test if void return s-unit is returned by the SUnitExtractor
-    //    var voidReturn = XElement.Parse(@"<expr_stmt><expr><call><name>findFilesInOut</name><argument_list>()</argument_list></call></expr>;</expr_stmt>");
-    //    Assert.Contains(voidReturn, (System.Collections.IList)extractor.GetVoidReturn());
-
-    //}
+    }
 
     //[TestCase]
     //public void GetEndingSUnits() {
