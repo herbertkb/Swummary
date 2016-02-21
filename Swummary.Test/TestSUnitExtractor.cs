@@ -72,24 +72,44 @@ public class TestSUnitExtractor
     [TestCase]
     public void GetVoidReturnSUnits()
     {
+        // SrcML objects which help generate the SrcML objects we need to test
+        var fileSetup = new SrcMLFileUnitSetup(Language.CPlusPlus);
+        var parser = new CPlusPlusCodeParser();
 
+        var fileUnit = fileSetup.GetFileUnitForXmlSnippet(srcmlOutput, "sampletestmethods.cpp");
+        var scope = parser.ParseFileUnit(fileUnit);
 
+        // Create the method srcml object in which to search for s-units.
+        var srcmlMethod = scope.GetDescendants<MethodDefinition>().First();
+
+        // Test if same action s-unit is returned by the SUnitExtractor
+        var sameAction = srcmlMethod.GetDescendants<Statement>()
+                .First(s => Regex.IsMatch(s.ToString(), "findFilesInOut"));
+
+        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetVoidReturn(srcmlMethod);
+
+        Assert.Contains(sameAction, sameActionsFound);
 
     }
 
-    //[TestCase]
-    //public void GetEndingSUnits() {
+    [TestCase]
+    public void GetEndingSUnits()
+    {
+        // SrcML objects which help generate the SrcML objects we need to test
+        var fileSetup = new SrcMLFileUnitSetup(Language.CPlusPlus);
+        var parser = new CPlusPlusCodeParser();
 
-    //    // Create the method srcml object in which to search for s-units.
-    //    var srcmlMethod = XElement.Parse(srcmlOutput);
+        var fileUnit = fileSetup.GetFileUnitForXmlSnippet(srcmlOutput, "sampletestmethods.cpp");
+        var scope = parser.ParseFileUnit(fileUnit);
 
-    //    // Load the method into a S-Unit Extractor
-    //    var extractor = new SUnitExtractor();
-    //    extractor.SetMethod(srcmlMethod);
+        // Create the method srcml object in which to search for s-units.
+        var srcmlMethod = scope.GetDescendants<MethodDefinition>().First();
 
-    //    // Test if ending s-unit is returned by the SUnitExtractor
-    //    var ending = XElement.Parse(@"<return>return <expr><literal type = ""boolean"" > true </literal ></expr>;</return>");
-    //    Assert.Contains(ending, 
-    //                    (System.Collections.IList)extractor.GetEnding());
-    //}
+        // Test if same action s-unit is returned by the SUnitExtractor
+        var sameAction = srcmlMethod.GetDescendants<Statement>().Last<Statement>();
+
+        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetEnding(srcmlMethod);
+
+        Assert.Contains(sameAction, sameActionsFound);
+    }
 }
