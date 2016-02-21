@@ -5,6 +5,7 @@ using ABB.SrcML;
 using ABB.SrcML.Data;
 using ABB.SrcML.Test.Utilities;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 /**
  * John:	findInOne, setFindInFilesDirFilter
@@ -59,8 +60,9 @@ public class TestSUnitExtractor
         var srcmlMethod = scope.GetDescendants<MethodDefinition>().First();
 
         // Test if same action s-unit is returned by the SUnitExtractor
-        //var sameAction = srcmlMethod.GetNamedChildren("setFindInFilesDirFilter").First();
-        var sameAction = srcmlMethod.Content.GetDescendants<NameUse>().First(n => n.Name == "setFindInFilesDirFilter");
+        var sameAction = srcmlMethod.GetDescendants<Statement>()
+                .First(s => Regex.IsMatch(s.ToString(), "setFindInFilesDirFilter"));
+
         var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetSameAction( srcmlMethod );
         
         Assert.Contains(sameAction, sameActionsFound );
