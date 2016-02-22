@@ -7,11 +7,39 @@ using ABB.SrcML.Test.Utilities;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-/**
+/******************************************************************************
  * John:	findInOne, setFindInFilesDirFilter
  * Keith:	findInOne, gethurrry, findFilesInOut
  * Dylan: 	return true
-*/
+
+        bool findInFiles()
+        {
+            const TCHAR* dir2Search = _findReplaceDlg.getDir2Search();
+
+            findFilesInOut();
+            if (!dir2Search[0] || !::PathFileExists(dir2Search))
+            {
+                return false;
+            }
+            string findString = "";
+
+            gethurry();
+
+            findInOne(int a, findString);
+
+            bool isRecursive = _findReplaceDlg.isRecursive();
+            bool isInHiddenDir = _findReplaceDlg.isInHiddenDir();
+
+            if (a.size() == 0)
+            {
+                a.setFindInFilesDirFilter("dddd", TEXT("*.*"));
+                a.getPatterns(findString);
+            }
+
+            return true;
+        }
+
+******************************************************************************/
 
 [TestFixture]
 public class TestSUnitExtractor

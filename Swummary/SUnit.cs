@@ -4,12 +4,12 @@ namespace Swummary
 {
     public struct SUnit
     {
-        SUnitType type;
-        string action;
-        string theme;
-        IEnumerable<string> args;
-        bool hasReturnType;
-        string returnType;
+        public SUnitType type;
+        public string action;
+        public string theme;
+        public IEnumerable<string> args;
+        public bool hasReturnType;
+        public string returnType;
 
         // Constructor for a single method call with no return type
         public SUnit(string action, string theme, IEnumerable<string> args)
