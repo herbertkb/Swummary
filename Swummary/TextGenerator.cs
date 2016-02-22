@@ -7,6 +7,5 @@ using System.Linq;
 
 public static class TextGenerator
 {
-    public static String GenerateText(String template, IEnumerable<WordNode> wordnodes) { return ""; }
-
+    public static String GenerateText(String template, Swummary.SUnit sunit) { return ""; }
 }

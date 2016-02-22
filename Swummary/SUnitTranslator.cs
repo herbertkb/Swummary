@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ABB.Swum;
 using ABB.Swum.Nodes;
+using ABB.SrcML.Data;
 using System.Xml.Linq;
 
 
@@ -12,8 +13,8 @@ using System.Xml.Linq;
 public static class SUnitTranslator
 {
 
-    public static IEnumerable<WordNode> Translate (XElement sunit) {
-        return new List<WordNode>();
+    public static Swummary.SUnit Translate (Statement sunit) {
+        return new Swummary.SUnit();
     }
 
 

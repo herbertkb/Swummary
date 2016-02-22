@@ -12,3 +12,5 @@ C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\obj\Debug\Swumma
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\obj\Debug\Swummary.Test.dll
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\obj\Debug\Swummary.Test.pdb
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\ABB.SrcML.Test.Utilities.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\Swummary.Test.dll.CodeAnalysisLog.xml
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\Swummary.Test.dll.lastcodeanalysissucceeded
