@@ -72,6 +72,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SUnit.cs" />
+    <Compile Include="SUnitType.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="Summarizer.cs" />
     <Compile Include="SUnitExtractor.cs" />
