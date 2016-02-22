@@ -180,6 +180,10 @@ namespace CodeAnalysisToolkit
             {
                 Console.WriteLine("return");
             }
+            else if (expResult.ToString().Contains(" = "))
+            {
+                Console.WriteLine("Ending S Unit contains '='");
+            }
             else
             {
                 var mCall = expResult.FindExpressions<MethodCall>().First();
@@ -288,7 +292,6 @@ namespace CodeAnalysisToolkit
             List<String> success = new List<String>();
             Dictionary<SwumRule, bool> inClasses = null;
 
-            string methodName = arg;
             bool debug = false; ///////////////// DEBUGGING
 
             // Get SrcML stuff in order

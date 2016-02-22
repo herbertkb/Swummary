@@ -1,23 +1,49 @@
-﻿using System;
+﻿using ABB.SrcML.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using ABB.SrcML;
 
-public class SUnitExtractor
+/// <summary>
+/// Static class which provides methods to parse a SrcML MethodDefinition for s_units.   
+/// </summary>
+public static class SUnitExtractor
 {
-    public SUnitExtractor ()
-	{
+    /// <summary>
+    /// Extracts same-action s_units from a method.
+    /// Same-actions s_units feature a method call which shares a symantic action with their method's name.  
+    /// For example, suppose a method named "LoadConfigFile" had a statement calling some "OpenFile()" method. 
+    /// </summary>
+    /// <param name="methodDef">The SrcML MethodDefinition from which to extract same action s_units.</param>
+    /// <returns>An IEnumerable collection containing the same action s_units found in methodDef</returns>
+    public static IEnumerable<Statement> GetSameAction( MethodDefinition methodDef ) { return new List<Statement>(); }
 
-	}
+    /// <summary>
+    /// Extracts void return s_units from a method.
+    ///  Void return s_units do not return a value or do not assign any value to a variable.
+    /// </summary>
+    /// <param name="methodDef">The SrcML MethodDefinition from which to extract void return s_units.</param>
+    /// <returns>An IEnumerable collection containing the void return s_units found in methodDef</returns>
+    public static IEnumerable<Statement> GetVoidReturn(MethodDefinition methodDef ) {
+        var statements = methodDef.GetDescendants<Statement>();
+        
 
-    public void SetMethod (XElement method) { }
-    public String GetCurrentMethodName() { return ""; }
+        return new List<Statement>();
+    }
 
-    public IEnumerable<XElement> GetSameAction() { return new List<XElement>(); }
+    /// <summary>
+    /// Extracts ending s_units from method. 
+    /// Ending s_units are statements that exit from the control of a method. 
+    /// These include explicit return statements and/or the last statement in a method. 
+    /// </summary>
+    /// <param name="methodDef">The SrcML MethodDefinition from which to extract ending s_units.</param>
+    /// <returns>An IEnumerable collection containing the ending s_units found in methodDef</returns>
+    public static IEnumerable<Statement> GetEnding( MethodDefinition methodDef ) {
+        
+        var statements = methodDef.GetDescendants<Statement>();
+        var lastStatement = statements.ElementAt(statements.Count() - 1);
 
-    public IEnumerable<XElement> GetVoidReturn() { return new List<XElement>(); }
-
-    public IEnumerable<XElement> GetEnding() { return new List<XElement>(); }
+        return new List<Statement>() { lastStatement };
+    }
 
 }
