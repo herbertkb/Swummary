@@ -33,10 +33,10 @@ namespace Swummary
                 hasArgs = false;
             }
 
-            if (returnType == null)
+            if (returnType != null)
             {
                 hasReturnType = true;
-                this.returnType = null;
+                this.returnType = returnType;
             }
             else
             {

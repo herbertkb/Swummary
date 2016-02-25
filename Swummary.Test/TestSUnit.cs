@@ -11,7 +11,11 @@ namespace Swummary.Test
         public void TestSUnitNoReturnType()
         {
             // a.getPatterns(findString)
-            var sunit = new SUnit("get", "patterns", new List<string>(1){ "findString" } );
+            var sunit = new SUnit(SUnitType.SingleMethodCall, 
+                                    "get", 
+                                    "patterns", 
+                                    new List<string>(1){ "findString" }, 
+                                    null );
 
             Assert.AreEqual(sunit.action, "get");
             Assert.AreEqual(sunit.theme, "patterns");
@@ -24,7 +28,8 @@ namespace Swummary.Test
         public void TestSUnitWithReturnType()
         {
             // string foob = FindAndBreakTwoVerbs("blahblahbreak");
-            var sunit = new SUnit(  "Find and Break",
+            var sunit = new SUnit(  SUnitType.SingleMethodCall,
+                                    "Find and Break",
                                     "Two Verbs",
                                     new List<string>(1) { "blahblahbreak" },
                                     "string"

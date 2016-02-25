@@ -73,25 +73,32 @@ public class TestSUnitExtractor
 	                            }</block></then></if>
 	                            <return>return <expr><literal type = ""boolean"" > true </literal ></expr>;</return>
                             }</block></function>";
-    
-    [TestCase]
-    public void GetSameActionSUnits() {
 
+    MethodDefinition methodDef;
+
+    [SetUp]
+    public void PrepareMethodDefinition()
+    {
         // SrcML objects which help generate the SrcML objects we need to test
         var fileSetup = new SrcMLFileUnitSetup(Language.CPlusPlus);
         var parser = new CPlusPlusCodeParser();
 
-        var fileUnit = fileSetup.GetFileUnitForXmlSnippet( srcmlOutput, "sampletestmethods.cpp" );
-        var scope = parser.ParseFileUnit( fileUnit );
+        var fileUnit = fileSetup.GetFileUnitForXmlSnippet(srcmlOutput, "sampletestmethods.cpp");
+        var scope = parser.ParseFileUnit(fileUnit);
 
         // Create the method srcml object in which to search for s-units.
-        var srcmlMethod = scope.GetDescendants<MethodDefinition>().First();
+        methodDef = scope.GetDescendants<MethodDefinition>().First();
+    }
+
+
+    [TestCase]
+    public void GetSameActionSUnits() {
 
         // Test if same action s-unit is returned by the SUnitExtractor
-        var sameAction = srcmlMethod.GetDescendants<Statement>()
+        var sameAction = methodDef.GetDescendants<Statement>()
                 .First(s => Regex.IsMatch(s.ToString(), "setFindInFilesDirFilter"));
 
-        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetSameAction( srcmlMethod );
+        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetSameAction(methodDef);
         
         Assert.Contains(sameAction, sameActionsFound );
 
@@ -100,21 +107,12 @@ public class TestSUnitExtractor
     [TestCase]
     public void GetVoidReturnSUnits()
     {
-        // SrcML objects which help generate the SrcML objects we need to test
-        var fileSetup = new SrcMLFileUnitSetup(Language.CPlusPlus);
-        var parser = new CPlusPlusCodeParser();
-
-        var fileUnit = fileSetup.GetFileUnitForXmlSnippet(srcmlOutput, "sampletestmethods.cpp");
-        var scope = parser.ParseFileUnit(fileUnit);
-
-        // Create the method srcml object in which to search for s-units.
-        var srcmlMethod = scope.GetDescendants<MethodDefinition>().First();
 
         // Test if same action s-unit is returned by the SUnitExtractor
-        var sameAction = srcmlMethod.GetDescendants<Statement>()
+        var sameAction = methodDef.GetDescendants<Statement>()
                 .First(s => Regex.IsMatch(s.ToString(), "findFilesInOut"));
 
-        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetVoidReturn(srcmlMethod);
+        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetVoidReturn(methodDef);
 
         Assert.Contains(sameAction, sameActionsFound);
 
@@ -123,20 +121,10 @@ public class TestSUnitExtractor
     [TestCase]
     public void GetEndingSUnits()
     {
-        // SrcML objects which help generate the SrcML objects we need to test
-        var fileSetup = new SrcMLFileUnitSetup(Language.CPlusPlus);
-        var parser = new CPlusPlusCodeParser();
-
-        var fileUnit = fileSetup.GetFileUnitForXmlSnippet(srcmlOutput, "sampletestmethods.cpp");
-        var scope = parser.ParseFileUnit(fileUnit);
-
-        // Create the method srcml object in which to search for s-units.
-        var srcmlMethod = scope.GetDescendants<MethodDefinition>().First();
-
         // Test if same action s-unit is returned by the SUnitExtractor
-        var sameAction = srcmlMethod.GetDescendants<Statement>().Last<Statement>();
+        var sameAction = methodDef.GetDescendants<Statement>().Last<Statement>();
 
-        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetEnding(srcmlMethod);
+        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetEnding(methodDef);
 
         Assert.Contains(sameAction, sameActionsFound);
     }
