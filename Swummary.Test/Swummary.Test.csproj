@@ -48,6 +48,9 @@
       <HintPath>..\packages\NUnit.3.0.1\lib\net40\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="OpenTextSummarizer">
+      <HintPath>..\External\OpenTextSummarizer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />

@@ -13,3 +13,4 @@ C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\nunit.frame
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.dll
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.pdb
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.csprojResolveAssemblyReference.cache
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\OpenTextSummarizer.dll
