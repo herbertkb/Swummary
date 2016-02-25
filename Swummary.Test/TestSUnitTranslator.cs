@@ -1,5 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
+using ABB.SrcML.Data;
+using ABB.SrcML.Test.Utilities;
+using ABB.SrcML;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 [TestFixture]
 public class TestSUnitTranslator
@@ -39,9 +44,9 @@ public class TestSUnitTranslator
 
     ******************************************************************************/
 
-    // Create a dummy XElement object from sample method code
+    // Create a dummy method defintion object from sample method code
     // by taking the raw XML output from srcml on a method from our samplemethods.cpp file
-    // and converting the string to a srcml method XML element.
+    // and converting the string to a srcml method definition within the [Setup] method
     string srcmlOutput = @"<function><type><name> bool </name></type> <name> findInFiles </name><parameter_list> () </parameter_list>
                         <block>{
 	                        <decl_stmt><decl><type><specifier>const</specifier> <name>TCHAR</name> <modifier>*</modifier></type><name>dir2Search</name> <init>= <expr><call><name><name>_findReplaceDlg</name><operator>.</operator><name>getDir2Search</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
@@ -67,26 +72,59 @@ public class TestSUnitTranslator
 	                        }</block></then></if>
 	                        <return>return <expr><literal type = ""boolean"" > true </literal ></expr>;</return>
                         }</block></function>";
-    [TestFixtureSetUp]
-    public void PrepareMethodDefintion()
+    MethodDefinition methodDef;
+
+    [SetUp]
+    public void PrepareMethodDefinition()
     {
+        // SrcML objects which help generate the SrcML objects we need to test
+        var fileSetup = new SrcMLFileUnitSetup(Language.CPlusPlus);
+        var parser = new CPlusPlusCodeParser();
 
+        var fileUnit = fileSetup.GetFileUnitForXmlSnippet(srcmlOutput, "sampletestmethods.cpp");
+        var scope = parser.ParseFileUnit(fileUnit);
+
+        // Create the method srcml object in which to search for s-units.
+        methodDef = scope.GetDescendants<MethodDefinition>().First();
     }
 
 
     [TestCase]
-    public void TranslateSameActionSUnit() {
+    public void TranslateSameActionSUnit()
+    {
+        var sameAction = methodDef.GetDescendants<Statement>()
+                .First(s => Regex.IsMatch(s.ToString(), "setFindInFilesDirFilter"));
 
+        var translated = SUnitTranslator.Translate(sameAction);
 
-
-
-        Assert.AreEqual(1, 2, "Not implemented.");
+        Assert.AreEqual("set", translated.action, "correct action");
+        Assert.AreEqual("filter", translated.theme, "exact theme");
+        Assert.IsTrue(Regex.IsMatch(translated.theme, "filter"), "vague theme");
     }
 
     [TestCase]
-    public void TranslateVoidReturnSUnit() { Assert.AreEqual(1, 2, "Not implemented."); }
+    public void TranslateVoidReturnSUnit()
+    {
+        var voidReturn = methodDef.GetDescendants<Statement>()
+                .First(s => Regex.IsMatch(s.ToString(), "gethurry"));
+
+        var translated = SUnitTranslator.Translate(voidReturn);
+
+        Assert.AreEqual("get", translated.action, "correct action");
+        Assert.AreEqual("hurry", translated.theme, "exact theme");
+        Assert.IsTrue(Regex.IsMatch(translated.theme, "get"), "vague theme");
+    }
 
     [TestCase]
-    public void TranslateEndingSUnit() { Assert.AreEqual(1, 2, "Not implemented."); }
+    public void TranslateEndingSUnit() {
+        var ending = methodDef.GetDescendants<Statement>()
+                .First(s => Regex.IsMatch(s.ToString(), "return"));
+
+        var translated = SUnitTranslator.Translate(ending);
+
+        Assert.AreEqual("return", translated.action, "correct action");
+        Assert.AreEqual("true", translated.theme, "exact theme");
+        Assert.IsTrue(Regex.IsMatch(translated.theme, "true"), "vague theme");
+    }
 
 }

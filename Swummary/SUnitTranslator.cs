@@ -13,7 +13,7 @@ using System.Xml.Linq;
 public static class SUnitTranslator
 {
 
-    public static Swummary.SUnit Translate (Statement sunit) {
+    public static Swummary.SUnit Translate (Statement statement) {
         return new Swummary.SUnit();
     }
 
