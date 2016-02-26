@@ -26,9 +26,25 @@ public static class SUnitExtractor
     /// <returns>An IEnumerable collection containing the void return s_units found in methodDef</returns>
     public static IEnumerable<Statement> GetVoidReturn(MethodDefinition methodDef ) {
         var statements = methodDef.GetDescendants<Statement>();
+
+        var voidReturns = new List<Statement>();
+
+        foreach(var s in statements)
+        {
+            var assignments = s.GetDescendants<OperatorUse>().Where(o => o.Text.Equals("="));
+
+            if (! assignments.Any()) {
+                voidReturns.Add(s);
+            }
+            
+        }
+
+        //var statement = statements.First();
+        //var exp = statement.GetExpressions().First();
+        
         
 
-        return new List<Statement>();
+        return voidReturns;
     }
 
     /// <summary>
