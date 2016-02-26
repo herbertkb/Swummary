@@ -41,9 +41,17 @@ public static class SUnitExtractor
     public static IEnumerable<Statement> GetEnding( MethodDefinition methodDef ) {
         
         var statements = methodDef.GetDescendants<Statement>();
-        var lastStatement = statements.ElementAt(statements.Count() - 1);
 
-        return new List<Statement>() { lastStatement };
+        var returns = statements.Where(s => s is ReturnStatement).ToList();
+        var last = statements.Last();
+
+        var endings = returns;
+        if(! returns.Contains(last))
+        {
+            endings.Add(last);
+        }
+
+        return endings;
     }
 
 }
