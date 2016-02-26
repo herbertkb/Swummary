@@ -16,7 +16,7 @@ public static class SUnitExtractor
     /// </summary>
     /// <param name="methodDef">The SrcML MethodDefinition from which to extract same action s_units.</param>
     /// <returns>An IEnumerable collection containing the same action s_units found in methodDef</returns>
-    public static IEnumerable<Statement> GetSameAction( MethodDefinition methodDef ) { return new List<Statement>(); }
+    public static IEnumerable<Statement> ExtractSameAction( MethodDefinition methodDef ) { return new List<Statement>(); }
 
     /// <summary>
     /// Extracts void return s_units from a method.
@@ -24,7 +24,7 @@ public static class SUnitExtractor
     /// </summary>
     /// <param name="methodDef">The SrcML MethodDefinition from which to extract void return s_units.</param>
     /// <returns>An IEnumerable collection containing the void return s_units found in methodDef</returns>
-    public static IEnumerable<Statement> GetVoidReturn(MethodDefinition methodDef ) {
+    public static IEnumerable<Statement> ExtractVoidReturn(MethodDefinition methodDef ) {
         var statements = methodDef.GetDescendants<Statement>();
 
         var voidReturns = new List<Statement>();
@@ -39,11 +39,6 @@ public static class SUnitExtractor
             
         }
 
-        //var statement = statements.First();
-        //var exp = statement.GetExpressions().First();
-        
-        
-
         return voidReturns;
     }
 
@@ -54,7 +49,7 @@ public static class SUnitExtractor
     /// </summary>
     /// <param name="methodDef">The SrcML MethodDefinition from which to extract ending s_units.</param>
     /// <returns>An IEnumerable collection containing the ending s_units found in methodDef</returns>
-    public static IEnumerable<Statement> GetEnding( MethodDefinition methodDef ) {
+    public static IEnumerable<Statement> ExtractEnding( MethodDefinition methodDef ) {
         
         var statements = methodDef.GetDescendants<Statement>();
 

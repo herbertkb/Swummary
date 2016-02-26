@@ -98,7 +98,7 @@ public class TestSUnitExtractor
         var sameAction = methodDef.GetDescendants<Statement>()
                 .First(s => Regex.IsMatch(s.ToString(), "setFindInFilesDirFilter"));
 
-        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetSameAction(methodDef);
+        var sameActionsFound = (System.Collections.IList)SUnitExtractor.ExtractSameAction(methodDef);
         
         Assert.Contains(sameAction, sameActionsFound );
 
@@ -112,7 +112,7 @@ public class TestSUnitExtractor
         var sameAction = methodDef.GetDescendants<Statement>()
                 .First(s => Regex.IsMatch(s.ToString(), "findFilesInOut"));
 
-        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetVoidReturn(methodDef);
+        var sameActionsFound = (System.Collections.IList)SUnitExtractor.ExtractVoidReturn(methodDef);
 
         Assert.Contains(sameAction, sameActionsFound);
 
@@ -124,7 +124,7 @@ public class TestSUnitExtractor
         // Test if same action s-unit is returned by the SUnitExtractor
         var sameAction = methodDef.GetDescendants<Statement>().Last<Statement>();
 
-        var sameActionsFound = (System.Collections.IList)SUnitExtractor.GetEnding(methodDef);
+        var sameActionsFound = (System.Collections.IList)SUnitExtractor.ExtractEnding(methodDef);
 
         Assert.Contains(sameAction, sameActionsFound);
     }

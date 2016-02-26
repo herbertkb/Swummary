@@ -58,9 +58,9 @@ namespace Swummary.Test
 
             // Extract SUnit Statements from MethodDefinition
             var statements = new List<Statement>();
-            statements.AddRange(SUnitExtractor.GetEnding(srcmlMethod));
-            statements.AddRange(SUnitExtractor.GetSameAction(srcmlMethod));
-            statements.AddRange(SUnitExtractor.GetVoidReturn(srcmlMethod));
+            statements.AddRange(SUnitExtractor.ExtractEnding(srcmlMethod));
+            statements.AddRange(SUnitExtractor.ExtractSameAction(srcmlMethod));
+            statements.AddRange(SUnitExtractor.ExtractVoidReturn(srcmlMethod));
 
             // Translate Statements into SUnits
             List<SUnit> sunits = statements.ConvertAll(
