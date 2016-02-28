@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using System.Linq;
 
 [TestFixture]
 public class TestSummarizer
@@ -10,6 +11,31 @@ public class TestSummarizer
 
 
     [TestCase]
-    public void SummarizeGeneratedText() { Assert.AreEqual(1, 2, "Not implemented."); }
+    public void TestSummarizeExampleText()
+    {
+        string sample = @"Automatic text summarization is the technique which 
+                    automatically creates an abstract or summary of a text. The
+                    technique has been developed for many years.
+                    According to Hovy and Lin there are two ways to view
+                    text summarization either as text extraction or text abstraction.
+                    Text extraction means to extract pieces of an original text
+                    on a statistical basis or with heuristic methods and put them
+                    together into a shorter text with the same information content.
+                    Sometimes, the extracted fragments are post-edited, for example
+                    by deleting subordinate clauses or joining incomplete clauses
+                    to form complete clauses. Text abstraction is to parse
+                    the original text in a linguistic way, interpret the text and find
+                    new concepts to describe the text and then generate a new
+                    shorter text with the same information content. This is in many
+                    aspects similar to what human abstractors do when writing
+                    an abstract, using surface level information like headings, key
+                    phrases, positions and so on.";
 
+        string summary = Summarizer.Summarize(sample);
+
+        Assert.NotNull(summary);
+        Assert.IsInstanceOf<string>(summary);
+        Assert.IsNotEmpty(summary);
+        Console.WriteLine(summary);
+    }
 }

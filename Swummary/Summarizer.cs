@@ -1,14 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenTextSummarizer;
 
 
-public class Summarizer
+public static class Summarizer
 {
-	public Summarizer ()
-	{
-	}
+    public static String Summarize(String text) {
 
-    public static String Summarize(String text) { return ""; }
+        var summaryArgs = new SummarizerArguments();
+
+        summaryArgs.DictionaryLanguage = "en";
+        //summaryArgs.DisplayLines = 3;
+        summaryArgs.DisplayPercent = 50;
+        summaryArgs.InputString = text;
+        
+
+        SummarizedDocument doc = OpenTextSummarizer.Summarizer.Summarize(summaryArgs);
+        var output = doc.Sentences;
+        var summary = string.Concat(output.ToArray());
+
+        return summary;
+
+    }
 
 }

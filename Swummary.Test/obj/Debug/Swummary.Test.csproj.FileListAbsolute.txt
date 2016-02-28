@@ -11,3 +11,5 @@ C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\nunit.
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\obj\Debug\Swummary.Test.csprojResolveAssemblyReference.cache
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\obj\Debug\Swummary.Test.dll
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\obj\Debug\Swummary.Test.pdb
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\ABB.SrcML.Test.Utilities.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\OpenTextSummarizer.dll
