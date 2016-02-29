@@ -32,16 +32,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ABB.SrcML">
-      <HintPath>..\External\ABB.SrcML.dll</HintPath>
+      <HintPath>..\..\DemoCodeAnalysisToolkit-master\CodeAnalysisToolkit\packages\ABB.SrcML.4.1.15.50\lib\net40\ABB.SrcML.dll</HintPath>
     </Reference>
     <Reference Include="ABB.SrcML.Core">
-      <HintPath>..\External\ABB.SrcML.Core.dll</HintPath>
+      <HintPath>..\..\DemoCodeAnalysisToolkit-master\CodeAnalysisToolkit\External\ABB.SrcML.Core.dll</HintPath>
     </Reference>
     <Reference Include="ABB.SrcML.Data">
-      <HintPath>..\External\ABB.SrcML.Data.dll</HintPath>
+      <HintPath>..\..\DemoCodeAnalysisToolkit-master\CodeAnalysisToolkit\packages\ABB.SrcML.Data.4.1.15.50\lib\net40\ABB.SrcML.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="ABB.SrcML.Data.Core">
+      <HintPath>..\DemoCodeAnalysisToolkit\CodeAnalysisToolkit\packages\ABB.SrcML.Data.Core.3.1.11.26\lib\net40\ABB.SrcML.Data.Core.dll</HintPath>
     </Reference>
     <Reference Include="ABB.Swum">
-      <HintPath>..\External\ABB.Swum.dll</HintPath>
+      <HintPath>..\..\DemoCodeAnalysisToolkit-master\CodeAnalysisToolkit\External\ABB.Swum.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\DemoCodeAnalysisToolkit-master\CodeAnalysisToolkit\External\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
@@ -53,7 +59,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=3.0.5813.39032, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.0.1\lib\net40\nunit.framework.dll</HintPath>
+      <HintPath>..\..\DemoCodeAnalysisToolkit-master\CodeAnalysisToolkit\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.util, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
