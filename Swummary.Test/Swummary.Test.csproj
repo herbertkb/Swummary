@@ -59,6 +59,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestMethodExtractor.cs" />
     <Compile Include="TestPipeline.cs" />
     <Compile Include="TestSUnit.cs" />
     <Compile Include="TestSummarizer.cs" />

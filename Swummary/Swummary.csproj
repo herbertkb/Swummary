@@ -75,6 +75,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MethodExtractor.cs" />
     <Compile Include="SUnit.cs" />
     <Compile Include="SUnitType.cs" />
     <Compile Include="Template.cs" />
