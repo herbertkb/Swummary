@@ -10,6 +10,22 @@ using System.Xml.Linq;
 public static class SUnitExtractor
 {
     /// <summary>
+    /// Extracts all selected s_units from a method: ending, void-return, and same-action.
+    /// TODO: add data-facilitating s_unit selection and filtering of ubiquitious and redundant s_units
+    /// </summary>
+    /// <param name="methodDef">The SrcML MethodDefinition from which to extract same action s_units.</param>
+    /// <returns>An IEnumerable collection containing the same action s_units found in methodDef</returns>
+    public static IEnumerable<Statement> ExtractAll(MethodDefinition methodDef) {
+        var summarySet = new List<Statement>();
+            summarySet.AddRange(SUnitExtractor.ExtractEnding(methodDef));
+            summarySet.AddRange(SUnitExtractor.ExtractSameAction(methodDef));
+            summarySet.AddRange(SUnitExtractor.ExtractVoidReturn(methodDef));
+
+        return summarySet.AsEnumerable();
+    }
+
+
+    /// <summary>
     /// Extracts same-action s_units from a method.
     /// Same-actions s_units feature a method call which shares a symantic action with their method's name.  
     /// For example, suppose a method named "LoadConfigFile" had a statement calling some "OpenFile()" method. 
