@@ -1,3 +1,6 @@
+#include <iostream>
+
+int main() { return 0; }
 
 /**
  * John:	findInOne, setFindInFilesDirFilter
@@ -38,7 +41,7 @@ bool findInFiles()
  * Keith	NoVerbreak, voidReturn
  * Dylan	lastRealLine = True;
  */
- breakEverything(string foo, int bar){
+ void breakEverything(string foo, int bar){
 	
 	
 	string foob = FindAndBreakTwoVerbs("blahblahbreak");

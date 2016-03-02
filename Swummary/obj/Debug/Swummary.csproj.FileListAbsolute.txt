@@ -1,12 +1,7 @@
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\Swummary.dll
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\Swummary.pdb
-C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\ABB.SrcML.Core.dll
-C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\ABB.SrcML.Data.dll
-C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\ABB.SrcML.dll
-C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\ABB.Swum.dll
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\nunit.core.dll
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\nunit.core.interfaces.dll
-C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\nunit.framework.dll
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\nunit.util.dll
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\NUnit.VisualStudio.TestAdapter.dll
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\nunit.framework.xml
@@ -14,3 +9,4 @@ C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.dl
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.pdb
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.csprojResolveAssemblyReference.cache
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\OpenTextSummarizer.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\ABB.SrcML.Data.Core.dll

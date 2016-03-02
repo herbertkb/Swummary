@@ -12,12 +12,12 @@ namespace Swummary
         public static IEnumerable<Tuple<string, string, MethodDefinition>> 
                 ExtractAllMethodsFromFile(string filePath)
         {
-            // open the damn file and convert to srcml
+            // open the file and convert to srcml
             var srcml = new SrcMLFile( filePath );
 
             // get a grip on the parts we care about
             var fileUnits = srcml.FileUnits;
-            var parser = new CPlusPlusCodeParser();
+            var parser = new CPlusPlusCodeParser();    //TODO: allow language to be chosen or detected
 
             // iterate through the mess to build a list of what we want
             var methodList = new List<Tuple<string, string, MethodDefinition>>();

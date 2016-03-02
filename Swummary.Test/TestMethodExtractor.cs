@@ -7,6 +7,7 @@ using ABB.SrcML;
 using ABB.SrcML.Data;
 using System.IO;
 using Swummary;
+using System.Reflection;
 
 namespace Swummary.Test
 {
@@ -16,16 +17,23 @@ namespace Swummary.Test
         [TestCase]
         public void TestMethodExtractorSingleFile()
         {
-            var methodList = MethodExtractor.ExtractAllMethodsFromFile("../testdata/Sample Methods/sampleMethods.cpp").ToList();
+            var baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var filepath = Path.Combine(baseDir, "..", ".." , "..", "testdata", "Sample Methods", "sampleMethods.cpp");
 
+            var methodList = MethodExtractor.ExtractAllMethodsFromFile(filepath).ToList();
+            
             Assert.IsNotEmpty(methodList);
             Console.WriteLine(methodList.ToString());
             
         }
+
         [TestCase]
         public void TestMethodExtractorDirectory()
         {
-            var methodList = MethodExtractor.ExtractAllMethodsFromFile("../testdata/OpenRA").ToList();
+            var baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var dirPath = Path.Combine(baseDir, "..", "..", "..", "testdata", "Sample Methods");
+
+            var methodList = MethodExtractor.ExtractAllMethodsFromDirectory( dirPath ).ToList();
 
             Assert.IsNotEmpty(methodList);
             Console.WriteLine(methodList.ToString());

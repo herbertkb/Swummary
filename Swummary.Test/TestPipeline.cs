@@ -109,7 +109,7 @@ namespace Swummary.Test
             Console.WriteLine(srcmlMethod.ToString());
 
             // Extract SUnit Statements from MethodDefinition
-            var statements = SUnitExtractor.ExtractAll(srcmlMethod);
+            var statements = SUnitExtractor.ExtractAll(srcmlMethod).ToList();
 
             // verify the statements selected
             Assert.IsNotEmpty(statements, "statements selected from method definition");
