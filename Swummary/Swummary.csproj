@@ -31,23 +31,23 @@
     <RootNamespace>Swummary</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ABB.SrcML">
-      <HintPath>..\..\DemoCodeAnalysisToolkit-master\CodeAnalysisToolkit\packages\ABB.SrcML.4.1.15.50\lib\net40\ABB.SrcML.dll</HintPath>
+    <Reference Include="ABB.SrcML, Version=4.1.15.50, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\ABB.SrcML.dll</HintPath>
     </Reference>
-    <Reference Include="ABB.SrcML.Core">
-      <HintPath>..\..\DemoCodeAnalysisToolkit-master\CodeAnalysisToolkit\External\ABB.SrcML.Core.dll</HintPath>
+    <Reference Include="ABB.SrcML.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\ABB.SrcML.Core.dll</HintPath>
     </Reference>
-    <Reference Include="ABB.SrcML.Data">
-      <HintPath>..\..\DemoCodeAnalysisToolkit-master\CodeAnalysisToolkit\packages\ABB.SrcML.Data.4.1.15.50\lib\net40\ABB.SrcML.Data.dll</HintPath>
+    <Reference Include="ABB.SrcML.Data, Version=4.1.15.50, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\ABB.SrcML.Data.dll</HintPath>
     </Reference>
-    <Reference Include="ABB.SrcML.Data.Core">
-      <HintPath>..\DemoCodeAnalysisToolkit\CodeAnalysisToolkit\packages\ABB.SrcML.Data.Core.3.1.11.26\lib\net40\ABB.SrcML.Data.Core.dll</HintPath>
+    <Reference Include="ABB.SrcML.Test.Utilities">
+      <HintPath>..\External\ABB.SrcML.Test.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="ABB.Swum">
       <HintPath>..\..\DemoCodeAnalysisToolkit-master\CodeAnalysisToolkit\External\ABB.Swum.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\..\DemoCodeAnalysisToolkit-master\CodeAnalysisToolkit\External\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
@@ -97,6 +97,15 @@
     <Folder Include="Swummary\bin\Debug\" />
     <Folder Include="Swummary\obj\Debug\TempPE\" />
     <Folder Include="Swummary\Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SrcML\libxml2-2.dll" />
+    <Content Include="SrcML\libxslt-1.dll" />
+    <Content Include="SrcML\src2srcml.exe" />
+    <Content Include="SrcML\src2srcml.html" />
+    <Content Include="SrcML\srcml2src.exe" />
+    <Content Include="SrcML\srcml2src.html" />
+    <Content Include="SrcML\zlib1.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

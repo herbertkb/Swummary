@@ -31,13 +31,16 @@
     <RootNamespace>Swummary.Test</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ABB.SrcML">
+    <Reference Include="ABB.SrcML, Version=4.1.15.50, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External\ABB.SrcML.dll</HintPath>
     </Reference>
-    <Reference Include="ABB.SrcML.Data">
+    <Reference Include="ABB.SrcML.Data, Version=4.1.15.50, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External\ABB.SrcML.Data.dll</HintPath>
     </Reference>
-    <Reference Include="ABB.SrcML.Test.Utilities">
+    <Reference Include="ABB.SrcML.Test.Utilities, Version=99.99.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External\ABB.SrcML.Test.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="ABB.Swum">

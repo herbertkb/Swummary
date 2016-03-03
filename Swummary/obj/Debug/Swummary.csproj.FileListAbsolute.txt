@@ -9,4 +9,7 @@ C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.dl
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.pdb
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\obj\Debug\Swummary.csprojResolveAssemblyReference.cache
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\OpenTextSummarizer.dll
-C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\ABB.SrcML.Data.Core.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\ABB.SrcML.Core.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\ABB.SrcML.Data.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\ABB.SrcML.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary\bin\Debug\ABB.SrcML.Test.Utilities.dll

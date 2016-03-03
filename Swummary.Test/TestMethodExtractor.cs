@@ -18,7 +18,10 @@ namespace Swummary.Test
         public void TestMethodExtractorSingleFile()
         {
             var baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var filepath = Path.Combine(baseDir, "..", ".." , "..", "testdata", "Sample Methods", "sampleMethods.cpp");
+            
+            var filepath = Path.Combine(baseDir, @"..\..\..\", "testdata", "Sample Methods", "sampleMethods.cpp");
+
+            Console.WriteLine(filepath);
 
             var methodList = MethodExtractor.ExtractAllMethodsFromFile(filepath).ToList();
             
