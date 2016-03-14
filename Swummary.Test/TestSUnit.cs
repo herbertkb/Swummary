@@ -13,7 +13,8 @@ namespace Swummary.Test
             // a.getPatterns(findString)
             var sunit = new SUnit(SUnitType.SingleMethodCall, 
                                     "get", 
-                                    "patterns", 
+                                    "patterns",
+                                    null,
                                     new List<string>(1){ "findString" }, 
                                     null );
 
