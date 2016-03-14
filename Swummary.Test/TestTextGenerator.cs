@@ -10,6 +10,7 @@ public class TestTextGenerator
     [TestCase]
     public void TestTextGenerationForSingleMethodCall() {
 
+        // addUser( username, password);
         SUnit sunit = new SUnit(SUnitType.SingleMethodCall, 
                                 "add", 
                                 "user", 
@@ -18,7 +19,7 @@ public class TestTextGenerator
 
         var sentence = TextGenerator.GenerateText(sunit);
 
-        Assert.AreEqual("Add user given username and password.", sentence);
+        Assert.AreEqual("Add user given username and password", sentence);
          
     }
 

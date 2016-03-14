@@ -55,6 +55,9 @@ namespace Swummary.Test
 
             var srcmlMethod = scope.GetDescendants<MethodDefinition>().First();
 
+            // Verify the method definition
+            Assert.IsInstanceOf<MethodDefinition>(srcmlMethod, "MethodDefinition found.");
+            Console.WriteLine(srcmlMethod.ToString());
 
             // Extract SUnit Statements from MethodDefinition
             var statements = new List<Statement>();
@@ -62,18 +65,80 @@ namespace Swummary.Test
             statements.AddRange(SUnitExtractor.ExtractSameAction(srcmlMethod));
             statements.AddRange(SUnitExtractor.ExtractVoidReturn(srcmlMethod));
 
+            // verify the statements selected
+            Assert.IsNotEmpty(statements, "statements selected from method definition");
+            Console.WriteLine(statements.ToString());
+
             // Translate Statements into SUnits
             List<SUnit> sunits = statements.ConvertAll(
                         new Converter<Statement, SUnit> (SUnitTranslator.Translate) );
+
+            // verify sunits have been translated
+            Assert.That(sunits.TrueForAll(s => s.action != null), "All SUnits initialized.");
+            Console.WriteLine(sunits.ToString());
+            
 
             // Generate text from SUnits
             List<string> sentences = sunits.ConvertAll(
                         new Converter<SUnit, string> (TextGenerator.GenerateText) );
 
+            // verify string generated
+            Assert.That(sentences.TrueForAll(s => s.Length > 0));
+            Console.WriteLine(sentences);
+
             // Collect text and summarize
             var methodDocument = String.Join<string>(" ", sentences);
             var summary = Summarizer.Summarize(methodDocument);
 
+
+            // verify summary
+            Assert.That(! summary.Equals(""));
+            Console.WriteLine(summary);
+
+        }
+
+        [Test]
+        public void TestPipelineWithSourceFile()
+        {
+            // TODO: rewrite unit test to handle all the methods in a file
+            // For now, just pull the first method from the file and proceed as TestPipelineXMLSnipper().
+            var srcmlMethod = MethodExtractor.ExtractAllMethodsFromFile("../Sample Methods/sample methods.cpp").First().Item3;
+
+            // Verify the method definition
+            Assert.IsInstanceOf<MethodDefinition>(srcmlMethod, "MethodDefinition found.");
+            Console.WriteLine(srcmlMethod.ToString());
+
+            // Extract SUnit Statements from MethodDefinition
+            var statements = SUnitExtractor.ExtractAll(srcmlMethod);
+
+            // verify the statements selected
+            Assert.IsNotEmpty(statements, "statements selected from method definition");
+            Console.WriteLine(statements.ToString());
+
+            // Translate Statements into SUnits
+            List<SUnit> sunits = statements.ConvertAll(
+                        new Converter<Statement, SUnit>(SUnitTranslator.Translate));
+
+            // verify sunits have been translated
+            Assert.That(sunits.TrueForAll(s => s.action != null), "All SUnits initialized.");
+            Console.WriteLine(sunits.ToString());
+
+
+            // Generate text from SUnits
+            List<string> sentences = sunits.ConvertAll(
+                        new Converter<SUnit, string>(TextGenerator.GenerateText));
+
+            // verify string generated
+            Assert.That(sentences.TrueForAll(s => s.Length > 0));
+            Console.WriteLine(sentences);
+
+            // Collect text and summarize
+            var methodDocument = String.Join<string>(" ", sentences);
+            var summary = Summarizer.Summarize(methodDocument);
+
+
+            // verify summary
+            Assert.That(!summary.Equals(""));
             Console.WriteLine(summary);
 
         }
