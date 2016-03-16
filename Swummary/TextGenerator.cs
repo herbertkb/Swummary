@@ -42,6 +42,23 @@ public static class TextGenerator
                 sentence += " and get " + sunit.returnType;
             }
 
+            sentence += " assign to " + sunit.lhs;
+
+        }
+
+        else {
+            sentence += sunit.action + " " + sunit.theme + " ";
+
+            foreach (String arg in sunit.args)
+            {
+                sentence += " " + arg;
+            }
+
+            if (sunit.hasReturnType)
+            {
+                sentence += " and get " + sunit.returnType;
+            }
+
         }
 
         return sentence;
