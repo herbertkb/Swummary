@@ -36,10 +36,7 @@ namespace Swummary.Test
             var baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             //var dirPath = Path.Combine(baseDir, "..", "..", "..", "testdata", "Sample Methods");
 
-            var targetDir = Path.GetFullPath(Path.Combine(baseDir, @"..\..\..\..\testdata\Sample Methods"));
-
-            Console.WriteLine(targetDir);
-
+            var targetDir = Path.GetFullPath(Path.Combine(baseDir, @"..\..\..\testdata\OpenRA"));
 
             var methodList = MethodExtractor.ExtractAllMethodsFromDirectory(targetDir).ToList();
 

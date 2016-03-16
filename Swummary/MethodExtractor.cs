@@ -69,12 +69,13 @@ namespace Swummary
                         srcmlDirectory);                            // path to srcml executables
 
             dataProject.UpdateAsync().Wait();
-            NamespaceDefinition sourceNamespace;
-            dataProject.WorkingSet.TryObtainReadLock(5000, out sourceNamespace);
+            NamespaceDefinition globalNamespace;
+            dataProject.WorkingSet.TryObtainReadLock(5000, out globalNamespace);
 
-            var methods = sourceNamespace.GetDescendants<MethodDefinition>();
+            var methods = globalNamespace.GetDescendants<MethodDefinition>();
+
+            // just seeing what comes out
             var method = methods.First();
-
             Console.WriteLine(method.GetFullName());
             
 
