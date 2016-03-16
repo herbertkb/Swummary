@@ -16,7 +16,7 @@ namespace Swummary
         {
             // open the file and convert to srcml
             //var srcml = new SrcMLFile( filePath );
-            var baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //var baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             //var srcmlPath = Path.Combine(baseDir,"..", "..","..","..","External");
             var srcmlPath = @"C:\Users\kh\Documents\GitHubVisualStudio\Swummary\External";
             Console.WriteLine(srcmlPath);
@@ -60,6 +60,24 @@ namespace Swummary
         public static IEnumerable<Tuple<string, string, MethodDefinition>> 
                 ExtractAllMethodsFromDirectory(string directoryPath)
         {
+            var currentDirectory = Path.GetFullPath(Assembly.GetExecutingAssembly().Location);
+            var srcmlDirectory = Path.GetFullPath(Path.Combine(currentDirectory, @"..\..\..\..\External"));
+
+            var dataProject = new DataProject<CompleteWorkingSet>(
+                        Path.GetDirectoryName(directoryPath),       // name for base directory
+                        directoryPath,                              // path to source files to extract
+                        srcmlDirectory);                            // path to srcml executables
+
+            dataProject.UpdateAsync().Wait();
+            NamespaceDefinition sourceNamespace;
+            dataProject.WorkingSet.TryObtainReadLock(5000, out sourceNamespace);
+
+            var methods = sourceNamespace.GetDescendants<MethodDefinition>();
+            var method = methods.First();
+
+            Console.WriteLine(method.GetFullName());
+            
+
             return new List<Tuple<string, string, MethodDefinition>>().AsEnumerable();
         }
     }

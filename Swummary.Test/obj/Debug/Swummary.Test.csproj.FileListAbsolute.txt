@@ -13,3 +13,6 @@ C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\obj\Debug\Swumma
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\obj\Debug\Swummary.Test.pdb
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\ABB.SrcML.Test.Utilities.dll
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\OpenTextSummarizer.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\Swummary.Test.dll.config
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\log4net.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.Test\bin\Debug\log4net.xml

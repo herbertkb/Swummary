@@ -13,7 +13,8 @@ public class TestTextGenerator
         // addUser( username, password);
         SUnit sunit = new SUnit(SUnitType.SingleMethodCall, 
                                 "add", 
-                                "user", 
+                                "user",
+                                null, 
                                 new List<string> { "username", "password" },
                                 "void");
 

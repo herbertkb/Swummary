@@ -34,9 +34,14 @@ namespace Swummary.Test
         public void TestMethodExtractorDirectory()
         {
             var baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var dirPath = Path.Combine(baseDir, "..", "..", "..", "testdata", "Sample Methods");
+            //var dirPath = Path.Combine(baseDir, "..", "..", "..", "testdata", "Sample Methods");
 
-            var methodList = MethodExtractor.ExtractAllMethodsFromDirectory( dirPath ).ToList();
+            var targetDir = Path.GetFullPath(Path.Combine(baseDir, @"..\..\..\..\testdata\Sample Methods"));
+
+            Console.WriteLine(targetDir);
+
+
+            var methodList = MethodExtractor.ExtractAllMethodsFromDirectory(targetDir).ToList();
 
             Assert.IsNotEmpty(methodList);
             Console.WriteLine(methodList.ToString());
