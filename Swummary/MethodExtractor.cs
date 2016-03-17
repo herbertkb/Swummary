@@ -57,8 +57,7 @@ namespace Swummary
             return methodList.AsEnumerable();
         }
 
-        public static IEnumerable<Tuple<string, string, MethodDefinition>> 
-                ExtractAllMethodsFromDirectory(string directoryPath)
+        public static IEnumerable<MethodDefinition> ExtractAllMethodsFromDirectory(string directoryPath)
         {
             var currentDirectory = Path.GetFullPath(Assembly.GetExecutingAssembly().Location);
             var srcmlDirectory = Path.GetFullPath(Path.Combine(currentDirectory, @"..\..\..\..\External\SrcML"));
@@ -74,12 +73,7 @@ namespace Swummary
 
             var methods = globalNamespace.GetDescendants<MethodDefinition>();
 
-            // just seeing what comes out
-            var method = methods.First();
-            Console.WriteLine(method.GetFullName());
-            
-
-            return new List<Tuple<string, string, MethodDefinition>>().AsEnumerable();
+            return methods;
         }
     }
 }
