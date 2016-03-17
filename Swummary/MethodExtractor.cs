@@ -76,6 +76,7 @@ namespace Swummary
 
             // just seeing what comes out
             var method = methods.First();
+            var ks = method.GetAncestors<TypeDefinition>();
             Console.WriteLine(method.GetFullName());
             
 
