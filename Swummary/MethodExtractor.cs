@@ -61,7 +61,7 @@ namespace Swummary
                 ExtractAllMethodsFromDirectory(string directoryPath)
         {
             var currentDirectory = Path.GetFullPath(Assembly.GetExecutingAssembly().Location);
-            var srcmlDirectory = Path.GetFullPath(Path.Combine(currentDirectory, @"..\..\..\..\External"));
+            var srcmlDirectory = Path.GetFullPath(Path.Combine(currentDirectory, @"..\..\..\..\External\SrcML"));
 
             var dataProject = new DataProject<CompleteWorkingSet>(
                         Path.GetDirectoryName(directoryPath),       // name for base directory
