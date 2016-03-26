@@ -120,6 +120,8 @@ public class TestSUnitTranslator
         var ending = methodDef.GetDescendants<Statement>()
                 .First(s => Regex.IsMatch(s.ToString(), "return"));
 
+        Console.WriteLine("Ending statement: {0}", ending);
+
         var translated = SUnitTranslator.Translate(ending);
 
         Assert.AreEqual("return", translated.action, "correct action");
