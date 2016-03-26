@@ -25,6 +25,14 @@ public static class SUnitTranslator
     private static UnigramTagger tagger;
     private static PCKimmoPartOfSpeechData posData;
 
+    private static BaseVerbRule SetupBaseVerbRule()
+    {
+        splitter = new ConservativeIdSplitter();
+        tagger = new UnigramTagger();
+        posData = new PCKimmoPartOfSpeechData();
+
+        return new BaseVerbRule(posData, tagger, splitter);
+    }
 
     static Swummary.SUnit findType(Statement statement)
     {
@@ -50,9 +58,22 @@ public static class SUnitTranslator
 
 
     //this goes to findType and pases thru to each case
-    public static Swummary.SUnit TranslateAny(Statement statement)
+    public static Swummary.SUnit Translate(Statement statement)
     {
-        return findType(statement);
+        //return findType(statement);
+
+        if(statement is ReturnStatement)
+        {
+            var action  = "Return";           
+            var expressions = statement.GetExpressions();
+
+            var theme = String.Join(" ", expressions);
+            return new SUnit(SUnitType.Return, action, theme, "", new List<string>(), "");
+        }
+        else
+        {
+            return TranslateMethodCall(statement);
+        }
 
     }
 
@@ -69,19 +90,8 @@ public static class SUnitTranslator
 
     public static Swummary.SUnit TranslateReturn(Statement statement)
     {
+        
 
-        //TODO: TEMPORARY STATEMENT -- where do i find the normal one
-        MethodDefinition TEMP = new MethodDefinition();
-
-        var statements = SUnitExtractor.ExtractEnding(TEMP);
-
-        foreach (Statement stat in statements)
-        {
-
-
-        }
-
-        //
         /*  
          new SUnit object
          return = verb
@@ -90,7 +100,6 @@ public static class SUnitTranslator
          if methodcall then generate swum
          
         */
-
         return new Swummary.SUnit();
     }
 
@@ -98,27 +107,22 @@ public static class SUnitTranslator
 
     public static Swummary.SUnit TranslateMethodCall(Statement statement)
     {
+        var exp = statement.GetExpressions().First();
 
-        //TODO: TEMPORARY STATEMENT -- where do i find the normal one
-        MethodDefinition TEMP = new MethodDefinition();
+        string type = exp.ResolveType().First().ToString();
+                
+        MethodContext mc = new MethodContext(type);
+        MethodDeclarationNode mdn = new MethodDeclarationNode(exp.ToString(), mc);
 
-        var statements = SUnitExtractor.ExtractEnding(TEMP); /////// im confused why im sending something to this, shouldnt i be passing it nothing and getting the statements
+        var swumRule = SetupBaseVerbRule();
+        swumRule.ConstructSwum(mdn);
 
+        SUnit sunit = new SUnit();
+        sunit.action = GetAction(mdn);
+        sunit.theme = GetTheme(mdn);
+        sunit.args = GetArgs(mdn);
 
-        foreach (Statement stat in statements)
-        {
-            SUnit sunit = new SUnit();
-
-            //
-            var mdn = BuildMethodCallSwum(stat.GetDescendants<MethodCall>().First().ToString());
-
-            sunit.action = GetAction(mdn);
-            sunit.theme = GetTheme(mdn);
-            sunit.args = GetArgs(mdn);
-
-        }
-
-        return new Swummary.SUnit();
+        return sunit;
     }
 
 
@@ -151,7 +155,7 @@ public static class SUnitTranslator
     }
 
 
-
+/*******************
     // generate swum given name
     //I decided to give up on the string swum builder and just go with this
 
@@ -206,4 +210,6 @@ public static class SUnitTranslator
 
         return mdn;
     }
+*****************************************************************************/
+
 }
