@@ -34,12 +34,23 @@ namespace Swummary.Test
         public void TestMethodExtractorDirectory()
         {
             var baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var targetDir = Path.GetFullPath(Path.Combine(baseDir, @"..\..\..\testdata\OpenRA"));
+            var targetDir = Path.GetFullPath(Path.Combine(baseDir, @"..\..\..\testdata\Sample Methods"));
 
             var methodList = MethodExtractor.ExtractAllMethodsFromDirectory(targetDir).ToList();
 
+            Assert.That(methodList is List<MethodDefinition>);
             Assert.IsNotEmpty(methodList);
-            Console.WriteLine(methodList.ToString());
+
+            // Generate report on methods extracted
+            foreach(var m in methodList)
+            {
+                var methodName = m.GetFullName();
+                var methodDef = m.ToString();
+                var parentClass = m.GetAncestors<TypeDefinition>();
+                
+                Console.WriteLine(String.Format("{0}\t{1}\t{2}", parentClass, methodName, methodDef));
+            }
+            //Console.WriteLine(methodList.ToString());
 
         }
     }
