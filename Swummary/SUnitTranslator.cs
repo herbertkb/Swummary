@@ -21,20 +21,25 @@ using System.IO;
 /// </summary>
 public static class SUnitTranslator
 {
-    private static ConservativeIdSplitter splitter;
-    private static UnigramTagger tagger;
-    private static PCKimmoPartOfSpeechData posData;
 
     private static BaseVerbRule SetupBaseVerbRule()
     {
-        splitter = new ConservativeIdSplitter();
-        tagger = new UnigramTagger();
-        posData = new PCKimmoPartOfSpeechData();
+        var splitter = new ConservativeIdSplitter();
+        var tagger = new UnigramTagger();
+        var posData = new PCKimmoPartOfSpeechData();
 
         return new BaseVerbRule(posData, tagger, splitter);
     }
+    private static FieldRule SetupFieldRule()
+    {
+        var splitter = new ConservativeIdSplitter();
+        var tagger = new UnigramTagger();
+        var posData = new PCKimmoPartOfSpeechData();
 
-    static Swummary.SUnit findType(Statement statement)
+        return new FieldRule(posData, tagger, splitter);
+    }
+
+    static SUnit findType(Statement statement)
     {
 
         /*
@@ -57,58 +62,63 @@ public static class SUnitTranslator
     }
 
 
-    //this goes to findType and pases thru to each case
-    public static Swummary.SUnit Translate(Statement statement)
+    public static SUnit Translate(Statement statement)
     {
-        //return findType(statement);
-
         if(statement is ReturnStatement)
         {
-            var action  = "Return";           
-            var expressions = statement.GetExpressions();
-
-            var theme = String.Join(" ", expressions);
-            return new SUnit(SUnitType.Return, action, theme, "", new List<string>(), "");
+            return TranslateReturn(statement);
         }
+
+        // Search statement for use of an assignment operator
+        if (statement.GetDescendants<OperatorUse>()
+                    .Where(o => o.Text.Equals("="))
+                    .Count() > 0)
+        {
+            return TranslateAssignment(statement);
+
+        }
+
         else
         {
             return TranslateMethodCall(statement);
         }
-
     }
 
-
-
-    public static Swummary.SUnit TranslateVoid(Statement statement)
+    private static SUnit TranslateAssignment(Statement statement)
     {
-        //TODO this should be the same
-        return new Swummary.SUnit();
-    }
+        // action = "Assign"
+        // define left-hand-side (lhs)
+        // theme = right hand side
+
+        var equalsSign = statement.GetDescendants<OperatorUse>()
+                                .Where(o => o.Text.Equals("=")).First();
+
+        var lhs = equalsSign.GetSiblingsBeforeSelf<VariableUse>().First();
+        var fieldRule = SetupFieldRule();
+        var lhsFieldContext = new FieldContext(lhs.ResolveType().First().ToString(), false, "");
+        var lhsDecNode = new FieldDeclarationNode(lhs.ToString(), lhsFieldContext);
+        fieldRule.ConstructSwum(lhsDecNode);
 
 
 
-
-    public static Swummary.SUnit TranslateReturn(Statement statement)
-    {
+        
         
 
-        /*  
-         new SUnit object
-         return = verb
-         
-         if var then get type
-         if methodcall then generate swum
-         
-        */
-        return new Swummary.SUnit();
+        return new SUnit();
     }
 
+    public static SUnit TranslateReturn(Statement statement)
+    {
+        var action = "Return";
+        var expressions = statement.GetExpressions();
 
+        var theme = String.Join(" ", expressions);
+        return new SUnit(SUnitType.Return, action, theme, "", new List<string>(), "");
+    }
 
-    public static Swummary.SUnit TranslateMethodCall(Statement statement)
+    public static SUnit TranslateMethodCall(Statement statement)
     {
         var exp = statement.GetExpressions().First();
-
         string type = exp.ResolveType().First().ToString();
                 
         MethodContext mc = new MethodContext(type);
@@ -151,7 +161,6 @@ public static class SUnitTranslator
         }
 
         return list;
-
     }
 
 
