@@ -50,7 +50,7 @@ namespace Swummary
                 hasArgs = false;
             }
 
-            if (returnType != null)
+            if (returnType != null && !returnType.Equals("void"))
             {
                 hasReturnType = true;
                 this.returnType = returnType;

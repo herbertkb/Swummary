@@ -14,13 +14,13 @@ public static class TextGenerator
 
         if (sunit.type == SUnitType.SingleMethodCall)
         {
-            sentence += sunit.action + " " + sunit.theme + " ";
+            sentence += sunit.action + " " + sunit.theme;
 
-            foreach (String arg in sunit.args)
+            if (sunit.args != null && sunit.args.Count() > 0)
             {
-                sentence += " " + arg;
+                sentence += " given " + string.Join(", ", sunit.args);
             }
-
+            
             if (sunit.hasReturnType)
             {
                 sentence += " and get " + sunit.returnType;
@@ -30,7 +30,7 @@ public static class TextGenerator
 
         else if (sunit.type == SUnitType.Assignment)
         {
-            sentence += sunit.action + " " + sunit.theme + " ";
+            sentence += sunit.action + " " + sunit.theme + " given ";
 
             foreach (String arg in sunit.args)
             {
@@ -60,6 +60,11 @@ public static class TextGenerator
             }
 
         }
+
+        // Begin with uppercase and end with period.
+        sentence = char.ToUpper(sentence[0]) + sentence.Substring(1);
+        sentence += ".";
+
 
         return sentence;
     }

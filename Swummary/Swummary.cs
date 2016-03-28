@@ -32,7 +32,7 @@ namespace Swummary
                 // Collect text and summarize
                 var methodDocument = String.Join<string>("\n", sentences);
 
-                // TEMP: Just use full set of sentences for now.
+                // TEMP: Just use full set of sentences for now. Don't use Summarizer.
                 //       Maybe set a flag for this.
                 //var summary = Summarizer.Summarize(methodDocument);
                 var summary = methodDocument;

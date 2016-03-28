@@ -30,11 +30,12 @@ namespace Swummary.Test
             
         }
 
-        [TestCase]
-        public void TestMethodExtractorDirectory()
+        [TestCase("Sample Methods")]
+        [TestCase("OpenRA")]
+        public void TestMethodExtractorDirectory(string directoryName)
         {
             var baseDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var targetDir = Path.GetFullPath(Path.Combine(baseDir, @"..\..\..\testdata\Sample Methods"));
+            var targetDir = Path.GetFullPath(Path.Combine(baseDir, @"..\..\..\testdata\", directoryName));
 
             var methodList = MethodExtractor.ExtractAllMethodsFromDirectory(targetDir).ToList();
 
@@ -50,7 +51,6 @@ namespace Swummary.Test
                 
                 Console.WriteLine(String.Format("{0}\t{1}\t{2}", parentClass, methodName, methodDef));
             }
-            //Console.WriteLine(methodList.ToString());
 
         }
     }

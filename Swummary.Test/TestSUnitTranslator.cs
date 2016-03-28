@@ -124,7 +124,7 @@ public class TestSUnitTranslator
 
         var translated = SUnitTranslator.Translate(ending);
 
-        Assert.AreEqual("return", translated.action, "correct action");
+        Assert.AreEqual("Return", translated.action, "correct action");
         Assert.AreEqual("true", translated.theme, "exact theme");
         Assert.IsTrue(Regex.IsMatch(translated.theme, "true"), "vague theme");
     }
