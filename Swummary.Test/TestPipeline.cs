@@ -18,6 +18,26 @@ namespace Swummary.Test
     /// </summary>
     class TestPipeline
     {
+        [TestCase("Sample Methods")]
+        [TestCase("OpenRA")]
+        public void TestSwummarizer(string directoryName)
+        {
+            var currentDirectory = Path.GetFullPath(Assembly.GetExecutingAssembly().Location);
+            var sourceDirectory = Path.GetFullPath(Path.Combine(currentDirectory,
+                                        @"..\..\..\..\testData\", directoryName));
+
+            var swummaries = Swummary.Swummarize(sourceDirectory);
+
+            foreach (var s in swummaries)
+            {
+                string methodName = s.Item1;
+                string methodSummary = s.Item2;
+
+                Console.WriteLine("{0}\n{1}\n", methodName, methodSummary);
+            }
+        }
+
+
         [Test]
         public void TestPipelineXMLSnippet ()
         {

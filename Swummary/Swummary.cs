@@ -8,7 +8,7 @@ using ABB.SrcML;
 
 namespace Swummary
 {
-    class Swummary
+    public class Swummary
     {
         public static IEnumerable<Tuple<string, string>> Swummarize(string directoryPath)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Swummary;
 
 namespace Swummary.CLI
 {
@@ -10,6 +11,16 @@ namespace Swummary.CLI
     {
         static void Main(string[] args)
         {
+            string directory = args[0];
+            var swummaries = Swummary.Swummarize(directory);
+
+            foreach (var s in swummaries)
+            {
+                string methodName = s.Item1;
+                string methodSummary = s.Item2;
+
+                Console.WriteLine("{0}\n{1}\n", methodName, methodSummary);
+            }
         }
     }
 }
