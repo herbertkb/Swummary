@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 using ABB.SrcML;
 using ABB.SrcML.Data;
@@ -8,6 +9,7 @@ using ABB.Swum;
 
 using NUnit.Framework;
 using ABB.SrcML.Test.Utilities;
+using System.Reflection;
 
 namespace Swummary.Test
 {
@@ -141,6 +143,60 @@ namespace Swummary.Test
             Assert.That(!summary.Equals(""));
             Console.WriteLine(summary);
 
+        }
+        [TestCase("OpenRA")]
+        [TestCase("Sample Methods")]
+        public void TestPipelineWithSourceDirectory(string directoryName)
+        {
+            var currentDirectory = Path.GetFullPath(Assembly.GetExecutingAssembly().Location);
+            var sourceDirectory = Path.GetFullPath(Path.Combine(currentDirectory,
+                                        @"..\..\..\..\testData\", directoryName));
+
+            var srcmlMethods = MethodExtractor.ExtractAllMethodsFromDirectory(sourceDirectory);
+
+            foreach (var methodDef in srcmlMethods)
+            {
+                // Print Class and Method Name
+                Console.WriteLine("\n{0}", methodDef.GetFullName());
+
+                // Extract SUnit Statements from MethodDefinition
+                var statements = SUnitExtractor.ExtractAll(methodDef).ToList();
+
+                // verify the statements selected
+                Assert.IsNotEmpty(statements, "statements selected from method definition");
+                foreach (var s in statements)
+                {
+                    Console.WriteLine(statements.ToString());
+                }
+                // Translate Statements into SUnits
+                List<SUnit> sunits = statements.ConvertAll(
+                            new Converter<Statement, SUnit>(SUnitTranslator.Translate));
+
+                // verify sunits have been translated
+                Assert.That(sunits.TrueForAll(s => s.action != null), "All SUnits initialized.");
+                foreach (var s in sunits)
+                {
+                    Console.WriteLine(s);
+                }
+                // Generate text from SUnits
+                List<string> sentences = sunits.ConvertAll(
+                            new Converter<SUnit, string>(TextGenerator.GenerateText));
+                
+                // verify string generated
+                Assert.That(sentences.TrueForAll(s => s.Length > 0));
+                foreach(var s in sentences)
+                {
+                    Console.WriteLine(s);
+                }
+
+                // Collect text and summarize
+                var methodDocument = String.Join<string>(" ", sentences);
+                var summary = Summarizer.Summarize(methodDocument);
+
+                // verify summary
+                Assert.That(!summary.Equals(""));
+                Console.WriteLine(summary);
+            }
         }
     }
 }
