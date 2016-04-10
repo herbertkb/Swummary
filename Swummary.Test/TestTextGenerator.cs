@@ -22,6 +22,7 @@ public class TestTextGenerator
 
         // Allow vaguer assertion and print output
         Assert.AreEqual("Add user given username, password.", sentence);
+        Console.WriteLine(sentence);
          
     }
 

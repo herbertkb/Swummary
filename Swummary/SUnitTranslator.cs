@@ -25,7 +25,7 @@ public static class SUnitTranslator
     private static BaseVerbRule SetupBaseVerbRule()
     {
         var splitter = new ConservativeIdSplitter();
-        var tagger = new UnigramTagger();
+        var tagger = new UnigramTagger();               // throwing error about path to tagger data
         var posData = new PCKimmoPartOfSpeechData();
 
         return new BaseVerbRule(posData, tagger, splitter);
@@ -119,7 +119,10 @@ public static class SUnitTranslator
     public static SUnit TranslateMethodCall(Statement statement)
     {
         var exp = statement.GetExpressions().First();
-        string type = exp.ResolveType().First().ToString();
+
+        Console.WriteLine(exp);
+        Console.WriteLine(exp.ResolveType());
+        string type = exp.ResolveType().ToString();
                 
         MethodContext mc = new MethodContext(type);
         MethodDeclarationNode mdn = new MethodDeclarationNode(exp.ToString(), mc);
