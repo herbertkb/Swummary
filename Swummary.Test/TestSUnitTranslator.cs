@@ -58,7 +58,7 @@ public class TestSUnitTranslator
 	                        }</block></then></if>
 	                        <decl_stmt><decl><type><name>string</name></type> <name>findString</name> <init>= <expr><literal type = ""string"" > """" </literal ></expr ></init ></decl >;</decl_stmt>
 
-	                        <expr_stmt><expr><call><name>gethurry</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+	                        <expr_stmt><expr><call><name>getHurry</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
 	
 	                        <macro><name>findInOne</name><argument_list>(<argument>int a</argument>, <argument>findString</argument>)</argument_list></macro><empty_stmt>;</empty_stmt>
 
@@ -97,6 +97,9 @@ public class TestSUnitTranslator
 
         var translated = SUnitTranslator.Translate(sameAction);
 
+        Console.WriteLine("SUnit Type: {0}\nAction: {1}\nTheme: {2}",
+                    translated.type, translated.action, translated.theme);
+
         Assert.AreEqual("set", translated.action, "correct action");
         Assert.AreEqual("filter", translated.theme, "exact theme");
         Assert.IsTrue(Regex.IsMatch(translated.theme, "filter"), "vague theme");
@@ -106,9 +109,12 @@ public class TestSUnitTranslator
     public void TranslateVoidReturnSUnit()
     {
         var voidReturn = methodDef.GetDescendants<Statement>()
-                .First(s => Regex.IsMatch(s.ToString(), "gethurry"));
+                .First(s => Regex.IsMatch(s.ToString(), "getHurry"));
 
         var translated = SUnitTranslator.Translate(voidReturn);
+
+        Console.WriteLine("SUnit Type: {0}\nAction: {1}\nTheme: {2}", 
+                            translated.type, translated.action, translated.theme);
 
         Assert.AreEqual("get", translated.action, "correct action");
         Assert.AreEqual("hurry", translated.theme, "exact theme");

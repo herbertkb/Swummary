@@ -119,15 +119,14 @@ public static class SUnitTranslator
     public static SUnit TranslateMethodCall(Statement statement)
     {
         var exp = statement.GetExpressions().First();
-
-        Console.WriteLine(exp);
-        Console.WriteLine(exp.ResolveType());
         string type = exp.ResolveType().ToString();
                 
         MethodContext mc = new MethodContext(type);
         MethodDeclarationNode mdn = new MethodDeclarationNode(exp.ToString(), mc);
 
         var swumRule = SetupBaseVerbRule();
+        swumRule.InClass(mdn);
+
         swumRule.ConstructSwum(mdn);
 
         SUnit sunit = new SUnit();
@@ -158,9 +157,13 @@ public static class SUnitTranslator
     {
         var list = new List<String>();
         List<ArgumentNode> gg = mdn.SecondaryArguments;
-        foreach (ArgumentNode i in gg)
+        
+        if (gg != null)
         {
-            list.Add(i.ToPlainString());
+            foreach (ArgumentNode i in gg)
+            {
+                list.Add(i.ToPlainString());
+            }
         }
 
         return list;

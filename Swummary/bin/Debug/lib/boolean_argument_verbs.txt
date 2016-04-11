@@ -1,0 +1,11 @@
+check
+assert
+add
+contains
+print
+println
+#printf?
+append
+add
+push
+set

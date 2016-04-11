@@ -1,0 +1,259 @@
+arisen
+awoken
+beaten
+#become
+begun
+bent
+beset
+#bet
+#bid
+bitten
+bled
+blown
+borne
+bought
+bound
+bred
+#broadcast
+broken
+brought
+built
+burned
+burnt
+#burst
+#cast
+caught
+chosen
+clung
+#come
+#cost
+crept
+#cut
+dealt
+dived
+done
+drawn
+dreamed
+dreamt
+driven
+drunk
+dug
+eaten
+fallen
+fed
+felt
+#fit
+fled
+flown
+flung
+forbidden
+foregone
+foretold
+forgiven
+forgotten
+forsaken
+fought
+found
+frozen
+given
+gone
+got
+gotten
+ground
+grown
+had
+hanged
+heard
+held
+hidden
+#hit
+hung
+#hurt
+kept
+knelt
+known
+laid
+lain
+#lean
+leaned
+leaped
+leapt
+learned
+learnt
+led
+left
+lent
+#let
+lighted
+lit
+lost
+made
+meant
+met
+misspelled
+misspelt
+mistaken
+mowed
+mown
+#overcome
+overdone
+overtaken
+overthrown
+paid
+#plead
+pleaded
+proved
+proven
+#put
+#quit
+#read
+#rid
+ridden
+risen
+#run
+rung
+said
+sat
+sawed
+sawn
+seen
+sent
+#set
+sewed
+sewn
+shaken
+sheared
+#shed
+shone
+shorn
+shot
+showed
+shown
+shrunk
+#shut
+slain
+slayed
+slept
+slid
+#slit
+slung
+smelled
+smelt
+smitten
+sold
+sought
+sowed
+sown
+spat
+sped
+speeded
+spelled
+spelt
+spent
+spilled
+spilt
+#split
+spoiled
+spoilt
+spoken
+#spread
+sprung
+spun
+stolen
+stood
+stridden
+striven
+struck
+stuck
+stung
+stunk
+sung
+sunk
+swelled
+swept
+swollen
+sworn
+swum
+swung
+taken
+taught
+thought
+thrived
+thrown
+#thrust
+told
+torn
+trodden
+understood
+upheld
+#upset
+waked
+weaved
+#wed
+wedded
+wept
+withdrawn
+withheld
+withstood
+woken
+won
+worn
+wound
+woven
+written 
+wrung
+# abode
+# accurst
+# acquit
+been
+# befallen
+# begotten
+# bestrode
+# betaken
+# bidden
+born
+# boughten
+# clept
+# come about
+# come to
+# come upon
+# drug
+forborne
+forgone
+forsworn
+# foughten
+# given off
+# gone over
+# held up
+# hit up
+# inset
+# interbred
+interwoven
+# kent
+# letten
+misgiven
+misled
+misunderstood
+# molten
+# overhung
+# rent
+# resat
+#reset
+# shat
+# shitten
+# shod
+# shotten
+# shriven
+snuck
+# speedrun
+# strode
+strung
+# sunken
+# test driven
+undercut
+underwritten
+undone
+# wist
+# worn out
+# wrought
+# yclept

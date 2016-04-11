@@ -1,0 +1,15 @@
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\Swummary.CLI.exe.config
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\Swummary.CLI.exe
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\Swummary.CLI.pdb
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\obj\Debug\Swummary.CLI.csprojResolveAssemblyReference.cache
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\obj\Debug\Swummary.CLI.exe
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\obj\Debug\Swummary.CLI.pdb
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\Swummary.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\OpenTextSummarizer.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\ABB.SrcML.Data.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\ABB.Swum.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\ABB.SrcML.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\ABB.SrcML.Core.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\Swummary.pdb
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\ABB.SrcML.Data.xml
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\ABB.SrcML.xml
