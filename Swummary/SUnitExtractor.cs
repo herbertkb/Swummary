@@ -68,6 +68,7 @@ public static class SUnitExtractor
     public static IEnumerable<Statement> ExtractEnding( MethodDefinition methodDef ) {
         
         var statements = methodDef.GetDescendants<Statement>();
+        if (statements.Count() == 0) { return new List<Statement>().AsEnumerable(); }
 
         var returns = statements.Where(s => s is ReturnStatement).ToList();
         var last = statements.Last();

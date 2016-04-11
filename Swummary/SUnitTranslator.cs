@@ -141,14 +141,14 @@ public static class SUnitTranslator
     //generate action from MDN
     static String GetAction(MethodDeclarationNode mdn)
     {
-        return mdn.Action.ToPlainString();
+        return mdn.Action.ToPlainString().ToLower();
     }
 
 
     //generate theme from MDN
     static String GetTheme(MethodDeclarationNode mdn)
     {
-        return mdn.Theme.ToPlainString();
+        return mdn.Theme.ToPlainString().ToLower();
     }
 
 
@@ -162,7 +162,7 @@ public static class SUnitTranslator
         {
             foreach (ArgumentNode i in gg)
             {
-                list.Add(i.ToPlainString());
+                list.Add(i.ToPlainString().ToLower());
             }
         }
 
