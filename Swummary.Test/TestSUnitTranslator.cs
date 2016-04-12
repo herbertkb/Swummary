@@ -118,7 +118,6 @@ public class TestSUnitTranslator
 
         Assert.AreEqual("get", translated.action, "correct action");
         Assert.AreEqual("hurry", translated.theme, "exact theme");
-        Assert.IsTrue(Regex.IsMatch(translated.theme, "get"), "vague theme");
     }
 
     [TestCase]

@@ -25,7 +25,7 @@ public static class SUnitTranslator
     private static BaseVerbRule SetupBaseVerbRule()
     {
         var splitter = new ConservativeIdSplitter();
-        var tagger = new UnigramTagger();               // throwing error about path to tagger data
+        var tagger = new UnigramTagger();              
         var posData = new PCKimmoPartOfSpeechData();
 
         return new BaseVerbRule(posData, tagger, splitter);
@@ -118,7 +118,14 @@ public static class SUnitTranslator
 
     public static SUnit TranslateMethodCall(Statement statement)
     {
-        var exp = statement.GetExpressions().First();
+        var expressions = statement.GetExpressions();
+        
+        // Give an empty SUnit if statement has no expressions.  
+        if (expressions.Count() == 0)
+        {
+            return new SUnit(SUnitType.SingleMethodCall, "", "", "", new List<string>(), "void");
+        }
+        var exp = expressions.First();
         string type = exp.ResolveType().ToString();
                 
         MethodContext mc = new MethodContext(type);
@@ -148,6 +155,9 @@ public static class SUnitTranslator
     //generate theme from MDN
     static String GetTheme(MethodDeclarationNode mdn)
     {
+        // If mdn sucks, then theme is empty string.
+        if (mdn.Theme == null){ return "";  }
+        
         return mdn.Theme.ToPlainString().ToLower();
     }
 
