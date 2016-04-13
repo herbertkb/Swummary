@@ -46,6 +46,11 @@ public static class TextGenerator
 
         }
 
+        else if (sunit.type == SUnitType.Return)
+        {
+            sentence += sunit.action + " " + sunit.theme;
+        }
+
         else {
             sentence += sunit.action + " " + sunit.theme + " ";
 

@@ -109,7 +109,7 @@ public static class SUnitTranslator
 
     public static SUnit TranslateReturn(Statement statement)
     {
-        var action = "Return";
+        var action = "return";
         var expressions = statement.GetExpressions();
 
         var theme = String.Join(" ", expressions);

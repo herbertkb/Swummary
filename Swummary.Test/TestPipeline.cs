@@ -177,7 +177,8 @@ namespace Swummary.Test
             foreach (var methodDef in srcmlMethods)
             {
                 // Print Class and Method Name
-               Console.WriteLine("\n{0}", methodDef.GetFullName());
+               Console.WriteLine("*************************\n\n{0}\n*************************", 
+                        methodDef.GetFullName());
 
                 // Extract SUnit Statements from MethodDefinition
                 var statements = SUnitExtractor.ExtractAll(methodDef).ToList();

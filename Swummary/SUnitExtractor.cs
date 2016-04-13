@@ -17,11 +17,12 @@ public static class SUnitExtractor
     /// <returns>An IEnumerable collection containing the same action s_units found in methodDef</returns>
     public static IEnumerable<Statement> ExtractAll(MethodDefinition methodDef) {
         var summarySet = new List<Statement>();
-            summarySet.AddRange(SUnitExtractor.ExtractEnding(methodDef));
-            summarySet.AddRange(SUnitExtractor.ExtractSameAction(methodDef));
-            summarySet.AddRange(SUnitExtractor.ExtractVoidReturn(methodDef));
 
-        return summarySet.AsEnumerable();
+        summarySet.AddRange(SUnitExtractor.ExtractSameAction(methodDef));
+        summarySet.AddRange(SUnitExtractor.ExtractVoidReturn(methodDef));
+        summarySet.AddRange(SUnitExtractor.ExtractEnding(methodDef));
+
+        return summarySet.Distinct<Statement>();
     }
 
 
