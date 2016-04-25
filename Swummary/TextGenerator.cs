@@ -32,9 +32,12 @@ public static class TextGenerator
         {
             sentence += sunit.action + " " + sunit.theme + " given ";
 
-            foreach (String arg in sunit.args)
+            if (sunit.args != null)
             {
-                sentence += " " + arg;
+                foreach (String arg in sunit.args)
+                {
+                    sentence += " " + arg + ",";
+                }
             }
 
             if (sunit.hasReturnType)

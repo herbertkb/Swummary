@@ -56,7 +56,7 @@ public class TestSUnitTranslator
 	                        <block>{
 		                        <return>return <expr><literal type = ""boolean"" > false </literal></expr>;</return>
 	                        }</block></then></if>
-	                        <decl_stmt><decl><type><name>string</name></type> <name>findString</name> <init>= <expr><literal type = ""string"" > """" </literal ></expr ></init ></decl >;</decl_stmt>
+	                        <decl_stmt><decl><type><name>string</name></type> <name>findString</name> <init>= <expr><literal type = ""string"" > ""target"" </literal ></expr ></init ></decl >;</decl_stmt>
 
 	                        <expr_stmt><expr><call><name>getHurry</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
 	
@@ -134,6 +134,17 @@ public class TestSUnitTranslator
         Assert.AreEqual("Return", translated.action, "correct action");
         Assert.AreEqual("true", translated.theme, "exact theme");
         Assert.IsTrue(Regex.IsMatch(translated.theme, "true"), "vague theme");
+    }
+
+    [TestCase]
+    public void TranslateAssignmentSUnit()
+    {
+        var assignmentStatement = methodDef.GetDescendants<Statement>().OfType<DeclarationStatement>().First();
+        Console.WriteLine("Assignment statement: {0}", assignmentStatement.ToString());
+
+        var translated = SUnitTranslator.Translate(assignmentStatement);
+
+        Console.WriteLine("Action: {0}\nTheme: {1}", translated.action, translated.theme);
     }
 
 }

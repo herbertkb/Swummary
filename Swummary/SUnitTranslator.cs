@@ -64,22 +64,29 @@ public static class SUnitTranslator
 
     public static SUnit Translate(Statement statement)
     {
+        // Return empty SUnit for empty statement.
+        if(statement.GetExpressions().Count() == 0)
+        {
+            return new SUnit(SUnitType.SingleMethodCall, "", "", "", new List<string>(), "void");
+        }
+
         if(statement is ReturnStatement)
         {
+            Console.WriteLine("TRANSLATE RETURN");
             return TranslateReturn(statement);
         }
 
-        // Search statement for use of an assignment operator
-        if (statement.GetDescendants<OperatorUse>()
-                    .Where(o => o.Text.Equals("="))
-                    .Count() > 0)
+        // 
+        if (statement.GetExpressions().First() is VariableDeclaration)
         {
+            Console.WriteLine("TRANSLATE ASSIGNMENT");
             return TranslateAssignment(statement);
 
         }
 
         else
         {
+            Console.WriteLine("TRANSLATE METHODCALL");
             return TranslateMethodCall(statement);
         }
     }
@@ -92,18 +99,23 @@ public static class SUnitTranslator
 
         var fieldRule = SetupFieldRule();
 
-        var equalsSign = statement.GetDescendants<OperatorUse>()
-                                .Where(o => o.Text.Equals("=")).First();
+        //        var equalsSign = statement.GetDescendants<OperatorUse>()
+        //                                .Where(o => o.Text.Equals("=")).First();
 
-        var lhs = equalsSign.GetSiblingsBeforeSelf<VariableUse>().First();
+        //        var lhs = equalsSign.GetSiblingsBeforeSelf<VariableUse>().First();
+
+        var assignExpression = (VariableDeclaration) statement.GetExpressions().First();
+        var lhs = assignExpression.Name;
+
         
-        var lhsFieldContext = new FieldContext(lhs.ResolveType().First().ToString(), false, "");
+        var lhsFieldContext = new FieldContext(assignExpression.VariableType.ToString(), false, "");
         var lhsDecNode = new FieldDeclarationNode(lhs.ToString(), lhsFieldContext);
         fieldRule.InClass(lhsDecNode);
         fieldRule.ConstructSwum(lhsDecNode);
 
         var rhsString = "";
-        var rhs = equalsSign.GetSiblingsAfterSelf<Expression>().First();
+        
+        var rhs = assignExpression.Initializer;
         if (rhs is VariableUse)
         {
             var rhsFieldContext = new FieldContext(rhs.ResolveType().First().ToString(), false, "");
@@ -128,9 +140,14 @@ public static class SUnitTranslator
 
             rhsString = mdn.ToPlainString();
         }
+        else
+        {
+            rhsString = rhs.ToString();
+        }
 
 
         var sunit = new SUnit();
+        sunit.type = SUnitType.Assignment;
         sunit.action = "Assign";
         sunit.lhs = lhsDecNode.ToPlainString();
         sunit.theme = rhsString;
