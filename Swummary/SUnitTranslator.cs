@@ -90,21 +90,58 @@ public static class SUnitTranslator
         // define left-hand-side (lhs)
         // theme = right hand side
 
+        var fieldRule = SetupFieldRule();
+
         var equalsSign = statement.GetDescendants<OperatorUse>()
                                 .Where(o => o.Text.Equals("=")).First();
 
         var lhs = equalsSign.GetSiblingsBeforeSelf<VariableUse>().First();
-        var fieldRule = SetupFieldRule();
+        
         var lhsFieldContext = new FieldContext(lhs.ResolveType().First().ToString(), false, "");
         var lhsDecNode = new FieldDeclarationNode(lhs.ToString(), lhsFieldContext);
+        fieldRule.InClass(lhsDecNode);
         fieldRule.ConstructSwum(lhsDecNode);
 
+        var rhsString = "";
+        var rhs = equalsSign.GetSiblingsAfterSelf<Expression>().First();
+        if (rhs is VariableUse)
+        {
+            var rhsFieldContext = new FieldContext(rhs.ResolveType().First().ToString(), false, "");
+            var rhsDecNode = new FieldDeclarationNode(rhs.ToString(), lhsFieldContext);
+            fieldRule.InClass(rhsDecNode);
+            fieldRule.ConstructSwum(rhsDecNode);
+
+            rhsString = rhsDecNode.ToPlainString();
+
+        }
+        else if (rhs is MethodCall)
+        {
+            
+            string type = rhs.ResolveType().ToString();
+
+            MethodContext mc = new MethodContext(type);
+            MethodDeclarationNode mdn = new MethodDeclarationNode(rhs.ToString(), mc);
+
+            var swumRule = SetupBaseVerbRule();
+            swumRule.InClass(mdn);
+            swumRule.ConstructSwum(mdn);
+
+            rhsString = mdn.ToPlainString();
+        }
 
 
-        
-        
+        var sunit = new SUnit();
+        sunit.action = "Assign";
+        sunit.lhs = lhsDecNode.ToPlainString();
+        sunit.theme = rhsString;
+       
 
-        return new SUnit();
+
+
+
+
+
+        return sunit;
     }
 
     public static SUnit TranslateReturn(Statement statement)

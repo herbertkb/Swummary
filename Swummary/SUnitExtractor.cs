@@ -1,4 +1,5 @@
 ﻿using ABB.SrcML.Data;
+using ABB.Swum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ public static class SUnitExtractor
 {
     /// <summary>
     /// Extracts all selected s_units from a method: ending, void-return, and same-action.
-    /// TODO: add data-facilitating s_unit selection and filtering of ubiquitious and redundant s_units
+    /// TODO: add data-facilitating s_unit selection.
     /// </summary>
     /// <param name="methodDef">The SrcML MethodDefinition from which to extract same action s_units.</param>
     /// <returns>An IEnumerable collection containing the same action s_units found in methodDef</returns>
@@ -22,7 +23,7 @@ public static class SUnitExtractor
         summarySet.AddRange(SUnitExtractor.ExtractVoidReturn(methodDef));
         summarySet.AddRange(SUnitExtractor.ExtractEnding(methodDef));
 
-        return summarySet.Distinct<Statement>();
+        return summarySet.Distinct<Statement>().OrderBy(s => s.PrimaryLocation);
     }
 
 
@@ -33,7 +34,20 @@ public static class SUnitExtractor
     /// </summary>
     /// <param name="methodDef">The SrcML MethodDefinition from which to extract same action s_units.</param>
     /// <returns>An IEnumerable collection containing the same action s_units found in methodDef</returns>
-    public static IEnumerable<Statement> ExtractSameAction( MethodDefinition methodDef ) { return new List<Statement>(); }
+    public static IEnumerable<Statement> ExtractSameAction( MethodDefinition methodDef ) {
+
+        var sameActions = new List<Statement>();
+
+        // Break each program element down into words, add them to a bag, and collect if any words repeat.
+
+        // Build Method name word list.
+
+
+
+        // Build and compare statement word list for each statement. 
+
+        return sameActions;
+    }
 
     /// <summary>
     /// Extracts void return s_units from a method.
