@@ -23,7 +23,7 @@ public static class SUnitExtractor
         summarySet.AddRange(SUnitExtractor.ExtractVoidReturn(methodDef));
         summarySet.AddRange(SUnitExtractor.ExtractEnding(methodDef));
 
-        return summarySet.Distinct<Statement>().OrderBy(s => s.PrimaryLocation);
+        return summarySet.Distinct<Statement>().OrderBy(s => s.PrimaryLocation.StartingLineNumber);
     }
 
 

@@ -135,12 +135,6 @@ public static class SUnitTranslator
         sunit.lhs = lhsDecNode.ToPlainString();
         sunit.theme = rhsString;
        
-
-
-
-
-
-
         return sunit;
     }
 
@@ -162,17 +156,19 @@ public static class SUnitTranslator
         {
             return new SUnit(SUnitType.SingleMethodCall, "", "", "", new List<string>(), "void");
         }
+
+        // Build a minimal method context and declaration node required by SWUM. 
         var exp = expressions.First();
         string type = exp.ResolveType().ToString();
-                
         MethodContext mc = new MethodContext(type);
         MethodDeclarationNode mdn = new MethodDeclarationNode(exp.ToString(), mc);
 
+        // Apply the SWUM to our statement
         var swumRule = SetupBaseVerbRule();
         swumRule.InClass(mdn);
-
         swumRule.ConstructSwum(mdn);
 
+        // Build and return SUnit from the SWUM
         SUnit sunit = new SUnit();
         sunit.action = GetAction(mdn);
         sunit.theme = GetTheme(mdn);
