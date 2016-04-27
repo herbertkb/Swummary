@@ -30,10 +30,11 @@ public static class TextGenerator
 
         else if (sunit.type == SUnitType.Assignment)
         {
-            sentence += sunit.action + " " + sunit.theme + " given ";
+            sentence += sunit.action + " " + sunit.theme;
 
             if (sunit.args != null)
             {
+                sentence += " given ";
                 foreach (String arg in sunit.args)
                 {
                     sentence += " " + arg + ",";
@@ -42,10 +43,10 @@ public static class TextGenerator
 
             if (sunit.hasReturnType)
             {
-                sentence += " and get " + sunit.returnType;
+                sentence += " and get " + sunit.returnType + ".";
             }
 
-            sentence += " assign to " + sunit.lhs;
+            sentence += " Assign to " + sunit.lhs;
 
         }
 

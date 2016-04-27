@@ -14,12 +14,19 @@ namespace Swummary.CLI
             string directory = args[0];
             var swummaries = Swummary.Swummarize(directory);
 
+            // top header
+            Console.WriteLine("# Swummary for " + directory);
+
             foreach (var s in swummaries)
             {
                 string methodName = s.Item1;
                 string methodSummary = s.Item2;
 
-                Console.WriteLine("{0}\n{1}\n", methodName, methodSummary);
+                // Subheaders with each method name followed by swummary in normal text.
+                Console.WriteLine("## {0}", methodName);
+                Console.WriteLine(methodSummary);
+
+                //Console.WriteLine("{0}\n{1}\n", methodName, methodSummary);
             }
         }
     }

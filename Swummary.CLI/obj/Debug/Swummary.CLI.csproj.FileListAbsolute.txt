@@ -13,3 +13,6 @@ C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\ABB.Src
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\Swummary.pdb
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\ABB.SrcML.Data.xml
 C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\ABB.SrcML.xml
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\log4net.dll
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\bin\Debug\log4net.xml
+C:\Users\kh\Documents\GitHubVisualStudio\Swummary\Swummary.CLI\obj\Debug\Swummary.CLI.csproj.Swummary.CLI.exe.config

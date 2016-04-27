@@ -72,21 +72,21 @@ public static class SUnitTranslator
 
         if(statement is ReturnStatement)
         {
-            Console.WriteLine("TRANSLATE RETURN");
+            //Console.WriteLine("TRANSLATE RETURN");
             return TranslateReturn(statement);
         }
 
         // 
         if (statement.GetExpressions().First() is VariableDeclaration)
         {
-            Console.WriteLine("TRANSLATE ASSIGNMENT");
+            //Console.WriteLine("TRANSLATE ASSIGNMENT");
             return TranslateAssignment(statement);
 
         }
 
         else
         {
-            Console.WriteLine("TRANSLATE METHODCALL");
+            //Console.WriteLine("TRANSLATE METHODCALL");
             return TranslateMethodCall(statement);
         }
     }
@@ -114,15 +114,21 @@ public static class SUnitTranslator
         fieldRule.ConstructSwum(lhsDecNode);
 
         var rhsString = "";
-        
-        var rhs = assignExpression.Initializer;
+        var rhsAction = "";
+        var rhsTheme = "";
+        Expression rhs = new Expression();
+        if (assignExpression.Initializer != null)
+        {
+            rhs = assignExpression.Initializer;
+        }
+
         if (rhs is VariableUse)
         {
             var rhsFieldContext = new FieldContext(rhs.ResolveType().First().ToString(), false, "");
             var rhsDecNode = new FieldDeclarationNode(rhs.ToString(), lhsFieldContext);
             fieldRule.InClass(rhsDecNode);
             fieldRule.ConstructSwum(rhsDecNode);
-
+            rhsAction = "Assign";
             rhsString = rhsDecNode.ToPlainString();
 
         }
@@ -138,6 +144,8 @@ public static class SUnitTranslator
             swumRule.InClass(mdn);
             swumRule.ConstructSwum(mdn);
 
+            rhsAction = mdn.Action.ToPlainString();
+            rhsTheme = mdn.Action.ToPlainString();
             rhsString = mdn.ToPlainString();
         }
         else
@@ -148,8 +156,9 @@ public static class SUnitTranslator
 
         var sunit = new SUnit();
         sunit.type = SUnitType.Assignment;
-        sunit.action = "Assign";
-        sunit.lhs = lhsDecNode.ToPlainString();
+        sunit.action = rhsString;
+        //sunit.lhs = lhsDecNode.ToPlainString();
+        sunit.lhs = lhs.ToString();
         sunit.theme = rhsString;
        
         return sunit;
